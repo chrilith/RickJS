@@ -46,10 +46,10 @@ XRick = {
 			}
 		});
 
-		Data.loadItem("pic_splash", "gfx/title.png");
-		Data.loadItem("pic_haf", "gfx/haf.png");
-		Data.loadItem("tiles_data", "gfx/tiles.png");
-		Data.loadItem("sprites_data", "gfx/sprites.png");
+		Data.loadItem("pic_splash", "data/title.png");
+		Data.loadItem("pic_haf", "data/haf.png");
+		Data.loadItem("tiles_data", "data/tiles.png");
+		Data.loadItem("sprites_data", "data/sprites.png");
 		
 		Sysarg.args_map = 0;
 		Sysarg.args_submap = 0;

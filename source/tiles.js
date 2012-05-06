@@ -1,0 +1,3 @@
+var TILES_BULLET = 0x01,
+	TILES_BOMB = 0x02,
+	TILES_RICK = 0x03;

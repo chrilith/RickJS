@@ -14,7 +14,7 @@
 	/*
 	 * Add a rectangle to a list of rectangles
 	 */
-	Rects.new = function(x, y, width, height, next) {
+	Rects.create = function(x, y, width, height, next) {	// was new()
 		var r;
 
 		r = new G.Rect(x, y, width, height);

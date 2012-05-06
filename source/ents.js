@@ -85,7 +85,7 @@ var ENT_XRICK,			// defined later
 			get step_count() { return this.c2; },	// e_them.c
 			set step_count(x) { this.c2 = x; },
 			get offsxx() { return this.c2; },	// e_them.c
-			set offsxx(x) { this.c2 = x; },
+			set offsxx(x) { this.c2 = x; }
 		};
 	}
 	
@@ -365,7 +365,7 @@ var ENT_FLG_TRIGGERS =
 		y0 -= DRAW_XYMAP_SCRTOP;
 	
 		/* add rectangle to the list */
-		Ent.rects = Rects.new(x0, y0, w0, h0, Ent.rects);
+		Ent.rects = Rects.create(x0, y0, w0, h0, Ent.rects);
 	}
 	
 	/*

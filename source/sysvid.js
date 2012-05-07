@@ -6,7 +6,7 @@ var	SYSVID_WIDTH	= 320;
 (function() {
 	/* local
 	 ********/
-	var screen;//, scanlines = false;
+	var screen, scanlines = false;
 
 	/* global
 	 *********/
@@ -40,7 +40,7 @@ var	SYSVID_WIDTH	= 320;
 		}
 		screen.redraw(Sysvid.fb, 0, 0, rects);
 	}
-/* TODO
+
 	Sysvid.toggle_scanlines = function(isOn) {
 		scanlines = !scanlines;
 		if (scanlines) {
@@ -49,7 +49,7 @@ var	SYSVID_WIDTH	= 320;
 			screen.setScanlines();
 		}
 	}
-*/	
+
 	Sysvid.clear = function() {
 		Sysvid.fb.renderer.fillRect(null, new G.Color(0,0,0));
 	}

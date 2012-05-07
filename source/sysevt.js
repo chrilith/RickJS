@@ -76,8 +76,8 @@
 					CLRBIT(CONTROL_PAUSE);
 					Control.last = CONTROL_PAUSE;
 
-//				} else if (key == 'S'.charCodeAt(0)) {
-//					Sysvid.toggle_scanlines();
+				} else if (key == 'S'.charCodeAt(0)) {
+					Sysvid.toggle_scanlines();
 
 				} else if (key == E.K_ESCAPE) {
 					CLRBIT(CONTROL_END);

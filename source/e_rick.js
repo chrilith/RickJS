@@ -95,7 +95,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		i = (E_RICK_ENT.y << 8) + offsy + ylow;
 		E_RICK_ENT.y = i >> 8;
 		offsy += 0x80;
-		ylow = i % 256;	// type = U8
+		ylow = i & 0xff;	// type = U8
 	
 		/* dead when out of screen */
 		if (E_RICK_ENT.y < 0 || E_RICK_ENT.y > 0x0140) {
@@ -167,7 +167,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 	
 		/* save */
 		E_RICK_ENT.y = y;
-		ylow = i % 256;	// type = U8
+		ylow = i & 0xff;	// type = U8
 	
 		/* climb? */
 		if ((env1 & MAP_EFLG_CLIMB) &&

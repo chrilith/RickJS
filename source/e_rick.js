@@ -539,6 +539,13 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		E_RICK_ENT.x = save_x;
 		E_RICK_ENT.y = save_y;
 		E_RICK_ENT.front = false;
+
+		// FIXME: should we reset other states?
+		E_RICK_STRST(E_RICK_STCLIMB);
+
+		// Face the correct direction
+		Game.dir = (save_x < 0x80) ? RIGHT : LEFT;
+
 		if (save_crawl) {
 			E_RICK_STSET(E_RICK_STCRAWL);
 		} else {

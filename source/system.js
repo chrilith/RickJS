@@ -30,6 +30,7 @@
 	 */
 	Sys.init = function() {
 		Gamalto.setMainContainer("container");
+		Sysarg.init();
 		Sysvid.init();
 	}
 

@@ -8,6 +8,7 @@
 			<script src="' + dir + 'xrick.js"></script> \
 			<script src="' + dir + 'system.js"></script> \
 			<script src="' + dir + 'sysvid.js"></script> \
+			<script src="' + dir + 'sysarg.js"></script> \
 			<script src="' + dir + 'sysevt.js"></script> \
 			<script src="' + dir + 'game.js"></script> \
 			<script src="' + dir + 'draw.js"></script> \

@@ -106,7 +106,7 @@ var LEFT = 1,
 		game_state = XRICK;
 		
 		/* main loop */
-		Game.timer = new G.Timer(gameLoop, 20, 0);
+		Game.timer = new G.Timer(gameLoop, 30, 0);
 		Game.timer.strictMode = true;
 		Game.timer.start();
 

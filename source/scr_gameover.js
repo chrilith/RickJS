@@ -26,6 +26,7 @@
 				Draw.tllst = Screen.gameovertxt.split("");
 				Draw.setfb(120, 80);
 				Draw.tilesList();
+				Draw.drawStatus();
 		
 				Game.rects = [Draw.SCREENRECT];
 				seq = 2;

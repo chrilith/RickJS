@@ -300,7 +300,7 @@ var LEFT = 1,
 							if (Game.map >= 0x04) {  /* reached end of game */
 								Sysarg.args_map = 0;
 								Sysarg.args_submap = 0;
-								game_state = GAMEOVER;
+								game_state = GAMEOVER;		// TODO: here we should play the last intro
 			
 							} else {  /* initialize game */
 								Ent.ents[1].x = Map.maps[Game.map].x;

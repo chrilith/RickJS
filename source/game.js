@@ -298,8 +298,8 @@ var LEFT = 1,
 			
 						case SCREEN_DONE:
 							if (Game.map >= 0x04) {  /* reached end of game */
-								sysarg_args_map = 0;
-								sysarg_args_submap = 0;
+								Sysarg.args_map = 0;
+								Sysarg.args_submap = 0;
 								game_state = GAMEOVER;
 			
 							} else {  /* initialize game */

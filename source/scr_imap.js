@@ -16,7 +16,7 @@ var SCREEN_TIMEOUT = 4000;
 		spbase, spoffs,		/* base, offset for sprite numbers table */
 		seq = 0;			/* anim sequence */
 
-	var anim_rect = new G.Rect(120, 16 + 16, 64, 64); /* anim rectangle */
+	var anim_rect = new G.Rect(128, 16 + 16, 64, 64); /* anim rectangle */
 
 	/* global
 	 *********/
@@ -27,10 +27,10 @@ var SCREEN_TIMEOUT = 4000;
 				Draw.tilesBank = 0;
 				Draw.tllst = Screen.imaptext[Game.map].split("");
 
-				Draw.setfb(32, 16);		// 32, 0
+				Draw.setfb(40, 16);
 				Draw.tilesSubList();
 				
-				Draw.setfb(32, 104);	// 32, 96
+				Draw.setfb(40, 104);
 				Draw.tilesList();
 				
 				Game.rects = null;
@@ -110,20 +110,20 @@ var SCREEN_TIMEOUT = 4000;
 		
 		flipflop++;
 		if (flipflop & 0x01) {
-			Draw.setfb(128, 16 + 16);
+			Draw.setfb(136, 16 + 16);
 			for (i = 0; i < 6; i++) {
 				Draw.tile(0x40);
 			}
-			Draw.setfb(128, 72 + 16);
+			Draw.setfb(136, 72 + 16);
 			for (i = 0; i < 6; i++) {
 				Draw.tile(0x06);
 			}
 		} else {
-			Draw.setfb(128, 16 + 16);
+			Draw.setfb(136, 16 + 16);
 			for (i = 0; i < 6; i++) {
 				Draw.tile(0x05);
 			}
-			Draw.setfb(128, 72 + 16);
+			Draw.setfb(136, 72 + 16);
 			for (i = 0; i < 6; i++) {
 				Draw.tile(0x40);
 			}
@@ -139,16 +139,16 @@ var SCREEN_TIMEOUT = 4000;
 	
 		if (flipflop & 0x02) {
 			for (i = 0; i < 8; i++) {
-				Draw.setfb(120, 16 + i * 8 + 16);
+				Draw.setfb(128, 16 + i * 8 + 16);
 				Draw.tile(0x04);
-				Draw.setfb(176, 16 + i * 8 + 16);
+				Draw.setfb(184, 16 + i * 8 + 16);
 				Draw.tile(0x04);
 			}
 		} else {
 			for (i = 0; i < 8; i++) {
-				Draw.setfb(120, 16 + i * 8 + 16);
+				Draw.setfb(128, 16 + i * 8 + 16);
 				Draw.tile(0x2B);
-				Draw.setfb(176, 16 + i * 8 + 16);
+				Draw.setfb(184, 16 + i * 8 + 16);
 				Draw.tile(0x2B);
 			}
 		}
@@ -159,7 +159,7 @@ var SCREEN_TIMEOUT = 4000;
 	 *
 	 */
 	function drawsprite() {
-		Draw.sprite(spnum, 128 + ((spx << 1) & 0x1C), 24 + (spy << 1) + 16);
+		Draw.sprite(spnum, 136 + ((spx << 1) & 0x1C), 24 + (spy << 1) + 16);
 	}
 
 	/*
@@ -171,7 +171,7 @@ var SCREEN_TIMEOUT = 4000;
 			i, j, tn = tn0[Game.map];
 	
 		for (i = 0; i < 6; i++) {
-			Draw.setfb(128, (24 + 8 * i) + 16);
+			Draw.setfb(136, (24 + 8 * i) + 16);
 			for (j = 0; j < 6; j++) {
 				Draw.tile(tn++);
 			}

@@ -91,7 +91,7 @@
 	 * \376=0xfe \377=0xff
 	 */
 	var screen_imaptext_amazon = "\
-		@@@@@SOUTH@AMERICA@1945@@@@@@@\xFF\
+		@@@@@SOUTH@AMERICA,@1945@@@@@@\xFF\
 		RICK@DANGEROUS@CRASH@LANDS@HIS\xFF\
 		@PLANE@OVER@THE@AMAZON@WHILE@@\xFF\
 		@SEARCHING@FOR@THE@LOST@GOOLU@\xFF\
@@ -100,10 +100,10 @@
 		FATE@HE@LANDS@IN@THE@MIDDLE@OF\xFF\
 		@@@A@BUNCH@OF@WILD@GOOLUS.@@@@\xFF\xFF\
 		@@CAN@RICK@ESCAPE@THESE@ANGRY@\xFF\
-		@@@AMAZONIAN@ANTAGONISTS@?@@@@\xFE".replace(/\s+/g, "");
+		@@@AMAZONIAN@ANTAGONISTS?@@@@@\xFE".replace(/\s+/g, "");
 
 		screen_imaptext_egypt = "\
-		@@@@EGYPT,@SOMETIMES@LATER@@@@\xFF\
+		@@@@EGYPT,@SOMETIME@LATER@@@@@\xFF\
 		RICK@HEADS@FOR@THE@PYRAMIDS@AT\xFF\
 		@@@@THE@REQUEST@OF@LONDON.@@@@\xFF\xFF\
 		HE@IS@TO@RECOVER@THE@JEWEL@OF@\xFF\

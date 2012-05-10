@@ -33,7 +33,7 @@ var	SYSVID_WIDTH	= 320;
 		screen = init_screen(SYSVID_WIDTH, SYSVID_HEIGHT);
 		Sysvid.fb = new G.Surface(SYSVID_WIDTH, SYSVID_HEIGHT);
 		buffer = Sysvid.fb;
-		Sysvid.fader = new GE.Fader(Sysvid.fb, new G.Color(), 500);
+		Sysvid.fader = new GE.Fader(Sysvid.fb, new G.Color(), 250);
 	}
 	
 	Sysvid.fade_start = function() {

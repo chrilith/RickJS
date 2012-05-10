@@ -91,7 +91,8 @@ var LEFT = 1,
 	 * local vars
 	 */
 	var isave_frow,
-		game_state;
+		game_state,
+		fading;
 	
 	/*
 	 * Main loop
@@ -199,6 +200,8 @@ var LEFT = 1,
 					Draw.drawStatus();				/* draw the status bar onto the buffer */
 					Game.rects = [Draw.SCREENRECT];	/* request full buffer refresh */
 					game_state = PLAY0;
+					fading = GE.IN;
+					Sysvid.fade_start();
 					return;
 
 
@@ -270,7 +273,7 @@ var LEFT = 1,
 					break;
 					
 				case PLAY3:
-					play3();
+					play3(timer);
 					return;
 
 
@@ -440,6 +443,7 @@ var LEFT = 1,
 	 *
 	 */
 	function play0() {
+
 		if (Control.status & CONTROL_END) {  /* request to end the game */
 			game_state = GAMEOVER;
 			return;
@@ -461,15 +465,22 @@ var LEFT = 1,
 	 *
 	 */
 	var static_r;	// static
-	function play3() {
+	function play3(timer) {
 	
 		Draw.clearStatus();  /* clear the status bar */
 		Ent.draw();          /* draw all entities onto the buffer */
 		/* sound */
 		Draw.drawStatus();   /* draw the status bar onto the buffer*/
-	
-		static_r = [Draw.STATUSRECT]; static_r.push.apply(static_r, Ent.rects);  /* refresh status bar too */
-		Game.rects = static_r;//[Draw.SCREENRECT];  /* take care to cleanup draw_STATUSRECT->next later! */
+
+		if (fading) {
+			Game.rects = [Draw.SCREENRECT];
+			if (!Sysvid.fader.update(timer, fading)) {
+				fading = Sysvid.fade_end();
+			}			
+		} else {
+			static_r = [Draw.STATUSRECT]; static_r.push.apply(static_r, Ent.rects);  /* refresh status bar too */
+			Game.rects = static_r;//[Draw.SCREENRECT];  /* take care to cleanup draw_STATUSRECT->next later! */
+		}
 
 		if (!E_RICK_STTST(E_RICK_STZOMBIE)) {  /* need to scroll ? */
 			if (Ent.ents[1].y >= 0xCC) {

@@ -6,7 +6,7 @@ var	SYSVID_WIDTH	= 320;
 (function() {
 	/* local
 	 ********/
-	var screen, scanlines = false;
+	var screen, buffer, scanlines = false;
 
 	/* global
 	 *********/
@@ -32,13 +32,24 @@ var	SYSVID_WIDTH	= 320;
 	Sysvid.init = function() {
 		screen = init_screen(SYSVID_WIDTH, SYSVID_HEIGHT);
 		Sysvid.fb = new G.Surface(SYSVID_WIDTH, SYSVID_HEIGHT);
+		buffer = Sysvid.fb;
+		Sysvid.fader = new GE.Fader(Sysvid.fb, new G.Color(), 500);
+	}
+	
+	Sysvid.fade_start = function() {
+		Sysvid.fader.reset();
+		buffer = Sysvid.fader.surface;
+	}
+
+	Sysvid.fade_end = function() {
+		buffer = Sysvid.fb;
 	}
 	
 	Sysvid.update = function(rects) {
 		if (rects == null) {
 			return;
 		}
-		screen.redraw(Sysvid.fb, 0, 0, rects);
+		screen.redraw(buffer, 0, 0, rects);
 	}
 
 	Sysvid.toggle_scanlines = function(isOn) {

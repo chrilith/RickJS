@@ -128,7 +128,7 @@ var LEFT = 1,
 			}
 
 			/* frame */
-			frame();
+			frame(timer);
 		}
 
 //		freedata(); /* free cached data */
@@ -141,7 +141,7 @@ var LEFT = 1,
 	 * When returning, game_rects must contain every parts of the buffer
 	 * that have been modified.
 	 */
-	function frame() {
+	function frame(timer) {
 		while (1) {
 			switch (game_state) {
 				case XRICK:
@@ -165,7 +165,7 @@ var LEFT = 1,
 
 
 				case INTRO_MAIN:
-					switch (Screen.introMain()) {
+					switch (Screen.introMain(timer)) {
 						case SCREEN_RUNNING:
 							return;
 						case SCREEN_DONE:

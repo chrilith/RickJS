@@ -24,7 +24,8 @@
 		first = true,
 		period = 0,
 		tm = 0,
-		i , s = [];
+		i , s = [],
+		fading;
 
 	/*
 	 * Main introduction
@@ -47,10 +48,16 @@
 		
 		 switch (seq) {
 			case 1:  /* display Rick Dangerous title and Core Design copyright */
+				if (fading) {
+					break;
+				}
 				Sysvid.clear();
 				tm = Sys.gettime();
 				Draw.pic(0, 0, 0x140, 0xc8, Data.getItem("pic_splash"));
 				seq = 2;
+
+				fading = GE.IN;
+				Sysvid.fade_start();
 				break;
 
 			case 2:  /* wait for key pressed or timeout */
@@ -59,6 +66,9 @@
 				} else if (Sys.gettime() - tm > SCREEN_TIMEOUT) {
 					seen++;
 					seq = 4;
+
+					fading = GE.OUT;
+					Sysvid.fade_start();
 				}
 				break;
 
@@ -73,6 +83,9 @@
 				break;
 
 			case 4:  /* dispay hall of fame */
+				if (fading) {
+					break;
+				}
 				Sysvid.clear();
 				tm = Sys.gettime();
 
@@ -92,6 +105,9 @@
 				}
 
 				seq = 5;
+
+				fading = GE.IN;
+				Sysvid.fade_start();
 				break;
 
 			case 5:  /* wait for key pressed or timeout */
@@ -101,6 +117,9 @@
 				} else if (Sys.gettime() - tm > SCREEN_TIMEOUT) {
 					seen++;
 					seq = 1;
+
+					fading = GE.OUT;
+					Sysvid.fade_start();
 				}
 				break;
 				
@@ -113,6 +132,16 @@
 					}
 				}
 				break;	
+		}
+		
+		if (fading) {
+			var a;
+			Game.rects = [Draw.SCREENRECT];
+			if (! (a= Sysvid.fader.update(timer, fading))) {
+				fading = Sysvid.fade_end();
+				// Loop directly to prevent flipping
+				Screen.introMain(timer);
+			}
 		}
 
 		if (Control.status & CONTROL_EXIT) {  /* check for exit request */

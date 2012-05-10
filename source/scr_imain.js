@@ -85,7 +85,7 @@
 				for (i = 0; i < 8; i++) {
 					var score = ("00" + Game.hscores[i].score).substr(-6);
 					Draw.tllst = (score +
-								  "@@@....@@@" +
+								  "@@@====@@@" +
 								  Game.hscores[i].name +
 								  "\xFF\xFF\xFE").split(""); // \377\377\376
 					Draw.tilesList();

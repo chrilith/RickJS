@@ -46,7 +46,7 @@
 		}
 		
 		 switch (seq) {
-			case 1:  /* dispay hall of fame */
+			case 1:  /* display Rick Dangerous title and Core Design copyright */
 				Sysvid.clear();
 				tm = Sys.gettime();
 				Draw.pic(0, 0, 0x140, 0xc8, Data.getItem("pic_splash"));
@@ -72,7 +72,7 @@
 				}
 				break;
 
-			case 4:  /* display Rick Dangerous title and Core Design copyright */
+			case 4:  /* dispay hall of fame */
 				Sysvid.clear();
 				tm = Sys.gettime();
 

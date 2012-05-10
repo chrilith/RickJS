@@ -75,10 +75,14 @@
 			case 3:  /* wait for key released */
 
 				if (!(Control.status & CONTROL_FIRE)) {
-					if (seen++ == 0)
+					if (seen++ == 0) {
 						seq = 4;
-					else
+					} else {
 						seq = 7;
+
+						fading = GE.OUT;
+						Sysvid.fade_start();
+					}
 				}
 				break;
 
@@ -129,18 +133,22 @@
 						seq = 1;
 					} else {
 						seq = 7;
+
+						fading = GE.OUT;
+						Sysvid.fade_start();
 					}
 				}
 				break;	
 		}
 		
 		if (fading) {
-			var a;
 			Game.rects = [Draw.SCREENRECT];
-			if (! (a= Sysvid.fader.update(timer, fading))) {
+			if (!Sysvid.fader.update(timer, fading)) {
 				fading = Sysvid.fade_end();
 				// Loop directly to prevent flipping
-				Screen.introMain(timer);
+				if (seq !=7) {
+					Screen.introMain(timer);
+				}
 			}
 		}
 
@@ -148,7 +156,7 @@
 			return SCREEN_EXIT;
 		}
 
-		if (seq == 7) {  /* we're done */
+		if (seq == 7 && !fading) {  /* we're done */
 			Sysvid.clear();
 			seq = 0;
 			seen = 0;

@@ -14,7 +14,8 @@ var SCREEN_TIMEOUT = 4000;
 		spx, spdx,			/* sprite x position and delta */
 		spy, spdy,			/* sprite y position and delta */
 		spbase, spoffs,		/* base, offset for sprite numbers table */
-		seq = 0;			/* anim sequence */
+		seq = 0,			/* anim sequence */
+		fading;
 
 	var anim_rect = new G.Rect(128, 16 + 16, 64, 64); /* anim rectangle */
 
@@ -50,6 +51,8 @@ var SCREEN_TIMEOUT = 4000;
 				//game_setmusic(map_maps[game_map].tune, 1);
 
 				seq = 1;
+				fading = GE.IN;
+				Sysvid.fade_start();
 				break;
 
 			case 1:  /* top and bottom borders */
@@ -84,12 +87,21 @@ var SCREEN_TIMEOUT = 4000;
 
 		if (Control.status & CONTROL_FIRE) {  /* end as soon as key pressed */
 			seq = 4;
+			fading = GE.OUT;
+			Sysvid.fade_start();
+		}
+
+		if (fading) {
+			Game.rects = [Draw.SCREENRECT];
+			if (!Sysvid.fader.update(timer, fading)) {
+				fading = Sysvid.fade_end();
+			}
 		}
 		
 		if (Control.status & CONTROL_EXIT)  /* check for exit request */
 			return SCREEN_EXIT;
 		
-		if (seq == 5) {  /* end as soon as key pressed */
+		if (seq == 5 && !fading) {  /* end as soon as key pressed */
 			Sysvid.clear();
 			seq = 0;
 			return SCREEN_DONE;

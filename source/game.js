@@ -179,7 +179,7 @@ var LEFT = 1,
 
 	
 				case INTRO_MAP:
-					switch (Screen.introMap()) {
+					switch (Screen.introMap(timer)) {
 						case SCREEN_RUNNING:
 							return;
 						case SCREEN_DONE:

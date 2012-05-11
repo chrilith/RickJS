@@ -457,8 +457,8 @@ var ENT_FLG_TRIGGERS =
 				if (Ent.ents[i].n && Ent.ents[i].sprite) {
 					/* (1.1) ... and is still active now and still needs to be drawn, */
 					/*       then check if rectangles intersect */
-					dx = Math.abs(Ent.ents[i].x - Ent.ents[i].prev_x);
-					dy = Math.abs(Ent.ents[i].y - Ent.ents[i].prev_y);
+					dx = Math.fabs(Ent.ents[i].x - Ent.ents[i].prev_x);
+					dy = Math.fabs(Ent.ents[i].y - Ent.ents[i].prev_y);
 
 					if (dx < 0x20 && dy < 0x16) {
 						/* (1.1.1) if they do, then create one rectangle */
@@ -559,9 +559,6 @@ var ENT_FLG_TRIGGERS =
 				} else if (k >= 0x18) {
 					EThem.t3_action(i);
 				} else {
-if (!Ent.actf[k])
-	console.log("Ent.actf", k, Ent.actf[k]);
-
 					Ent.actf[k](i);
 				}
 			}

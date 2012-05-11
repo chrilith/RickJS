@@ -365,19 +365,19 @@ var ENT_FLG_TRIGGERS =
 	 * so it fits into the display zone.
 	 */
 	Ent.addrect = function(x, y, width, height) {
-		var x0, y0;
-		var w0, h0;
+		var x0, y0;	// S16
+		var w0, h0;	// U16
 	
 		/*sys_printf("rect %#04x,%#04x %#04x %#04x ", x, y, width, height);*/
 		
 		/* align to tiles */
-		x0 = x & 0xfff8;
-		y0 = y & 0xfff8;
+		x0 = G.Convert.toSInt16(x & 0xfff8);
+		y0 = G.Convert.toSInt16(y & 0xfff8);
 		w0 = width;
 		h0 = height;
 		if (x - x0) { w0 = (w0 + (x - x0)) | 0x0007; }
 		if (y - y0) { h0 = (h0 + (y - y0)) | 0x0007; }
-	
+
 		/* clip */
 		var tmp = Draw.clipms(x0, y0, w0, h0);
 		if (tmp.returns) {  /* do not add if fully clipped */

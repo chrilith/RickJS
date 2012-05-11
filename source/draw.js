@@ -237,12 +237,12 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	Draw.spriteBackground = function(x, y) {
 		var r, c;
 		var rmax, cmax;
-		var xmap, ymap;
+		var xmap, ymap;	// S16
 		var xs, ys, tmp;
 	
 		/* aligne to column and row, prepare map coordinate, and clip */
-		xmap = x & 0xFFF8;
-		ymap = y & 0xFFF8;
+		xmap = G.Convert.toSInt16(x & 0xFFF8);
+		ymap = G.Convert.toSInt16(y & 0xFFF8);
 		cmax = (x - xmap == 0 ? 0x20 : 0x28);  /* width, 4 tl cols, 8 pix each */
 		rmax = (y & 0x04) ? 0x20 : 0x18;  /* height, 3 or 4 tile rows */
 

@@ -325,7 +325,6 @@ var ENT_XRICK,			// defined later
 			Ent.ents[e].w = Ent.entdata[Map.marks[m].ent].w;
 			Ent.ents[e].h = Ent.entdata[Map.marks[m].ent].h;
 			Ent.ents[e].sprbase = Ent.entdata[Map.marks[m].ent].spr;
-			Ent.ents[e].sprite = Ent.entdata[Map.marks[m].ent].spr; // (U8)
 			Ent.ents[e].step_no_i = Ent.entdata[Map.marks[m].ent].sni;
 			Ent.ents[e].trigsnd = Ent.entdata[Map.marks[m].ent].snd; // (U8)
 
@@ -347,6 +346,7 @@ var ENT_FLG_TRIGGERS =
 			}
 //#undef ENT_FLG_TRIGGERS
 		
+			Ent.ents[e].sprite = Ent.ents[e].sprbase;
 			Ent.ents[e].trig_x = Map.marks[m].lt & 0xf8;
 			Ent.ents[e].latency = (Map.marks[m].lt & 0x07) << 5;  /* <<5 eq *32 */
 		

@@ -327,7 +327,7 @@ var LEFT = 1,
 					Draw.map();                     /* draw the map onto the buffer */
 					Draw.drawStatus();              /* draw the status bar onto the buffer */
 					Game.rects = [Draw.SCREENRECT];  /* request full screen refresh */
-					game_state = PLAY3;
+					game_state = PLAY0;
 					return;
 
 	

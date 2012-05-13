@@ -108,8 +108,7 @@ var LEFT = 1,
 		
 		/* main loop */
 		Game.timer = new G.Timer(gameLoop, 30, 0);
-		Game.timer.strictMode = true;
-		Game.timer.start();
+		Game.timer.start(true);
 
 		function gameLoop(timer) {
 			/* timer */

@@ -34,7 +34,7 @@ XRick = {
 	init: function() {
 		var nb = 0;
 		Data = new G.BitmapLibrary(function() {
-			if (++nb == 4) {
+			if (++nb == 5) {
 				Tiles.data = [];
 				Tiles.data[0] = new G.TileSet(Data.getItem("tiles_data"), new G.Rect(0, 0 * 8 * 256, 8, 8 * 256), 256, 8, 8);
 				Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), new G.Rect(0, 1 * 8 * 256, 8, 8 * 256), 256, 8, 8);
@@ -48,6 +48,7 @@ XRick = {
 
 		Data.loadItem("pic_splash", "data/title.png");
 		Data.loadItem("pic_haf", "data/haf.png");
+		Data.loadItem("pic_congrat", "data/congrat.png");
 		Data.loadItem("tiles_data", "data/tiles.png");
 		Data.loadItem("sprites_data", "data/sprites.png");
 		

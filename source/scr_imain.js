@@ -94,10 +94,10 @@
 				tm = Sys.gettime();
 
 				/* hall of fame title */
-				Draw.pic(0, 0, 0x140, 0x20, Data.getItem("pic_haf"));
+				Draw.pic(64, 4, 190, 22, Data.getItem("pic_haf"));
 			
 				/* hall of fame content */
-				Draw.setfb(56, 40);
+				Draw.setfb(56, 48);
 			
 				for (i = 0; i < 8; i++) {
 					var score = ("00" + Game.hscores[i].score).substr(-6);

@@ -54,7 +54,9 @@ var TILE_POINTER = 0x3A,	// \072
 			for (i = 0; i < 10; i++) {
 				name[i] = '@'.charCodeAt(0);
 			}
-			x = y = p = 0;
+			x = 5;
+			y = 4;
+			p = 0;
 			Game.rects = [Draw.SCREENRECT];
 			seq = 1;
 		}
@@ -63,7 +65,10 @@ var TILE_POINTER = 0x3A,	// \072
 	
 			case 1:  /* prepare screen */
 				Sysvid.clear();
-				Draw.setfb(76, 40);
+
+				Draw.pic(36, 4, 244, 22, Data.getItem("pic_congrat"));
+
+				Draw.setfb(72, 40);
 				Draw.tilesListImm("PLEASE@ENTER@YOUR@NAME\xFE");
 				for (i = 0; i < 6; i++) {
 					for (j = 0; j < 4; j++) {

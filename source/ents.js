@@ -324,9 +324,9 @@ var ENT_XRICK,			// defined later
 			Ent.ents[e].w = Ent.entdata[Map.marks[m].ent].w;
 			Ent.ents[e].h = Ent.entdata[Map.marks[m].ent].h;
 			Ent.ents[e].sprbase = Ent.entdata[Map.marks[m].ent].spr;
-			Ent.ents[e].sprite = Ent.entdata[Map.marks[m].ent].spr % 256; // (U8)
+			Ent.ents[e].sprite = Ent.entdata[Map.marks[m].ent].spr & 0xff; // (U8)
 			Ent.ents[e].step_no_i = Ent.entdata[Map.marks[m].ent].sni;
-			Ent.ents[e].trigsnd = Ent.entdata[Map.marks[m].ent].snd % 256; // (U8)
+			Ent.ents[e].trigsnd = Ent.entdata[Map.marks[m].ent].snd & 0xff; // (U8)
 
 			/*
 			 * FIXME what is this? when all trigger flags are up, then
@@ -342,7 +342,7 @@ var ENT_FLG_TRIGGERS =
 		(ENT_FLG_TRIGBOMB|ENT_FLG_TRIGBULLET|ENT_FLG_TRIGSTOP|ENT_FLG_TRIGRICK);
 			if ((Ent.ents[e].flags & ENT_FLG_TRIGGERS) == ENT_FLG_TRIGGERS
 			&& e >= 0x09) {
-				Ent.ents[e].sprbase = (Ent.entdata[Map.marks[m].ent].sni & 0x00ff) % 256; // (U8)
+				Ent.ents[e].sprbase = (Ent.entdata[Map.marks[m].ent].sni & 0x00ff) & 0xff; // (U8)
 			}
 //#undef ENT_FLG_TRIGGERS
 		

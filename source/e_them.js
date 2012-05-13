@@ -104,7 +104,7 @@ var TYPE_1A = (0x00),
 			}
 			/* save, cleanup and return */
 			Ent.ents[e].y = y;
-			Ent.ents[e].ylow = i % 256; //(U8)
+			Ent.ents[e].ylow = i  & 0xff; //(U8)
 			Ent.ents[e].offsy += 0x0080;
 			if (Ent.ents[e].offsy > 0x0800) {
 				Ent.ents[e].offsy = 0x0800;
@@ -272,7 +272,7 @@ var TYPE_1A = (0x00),
 	
 		/* save */
 		Ent.ents[e].offsy += 0x0080;
-		Ent.ents[e].ylow = i % 256; // ylow > U8
+		Ent.ents[e].ylow = i & 0xff; // ylow > U8
 		Ent.ents[e].y = i >> 8;
 	
 		/* calc new x */
@@ -426,7 +426,7 @@ var TYPE_1A = (0x00),
 				if (!(env1 & MAP_EFLG_VERT)) {
 					/* save */
 					Ent.ents[e].y = y;
-					Ent.ents[e].ylow = i % 256; // U8
+					Ent.ents[e].ylow = i  & 0xff; // U8
 					Ent.ents[e].offsy += 0x0080;
 					if (Ent.ents[e].offsy > 0x0800) {
 						Ent.ents[e].offsy = 0x0800;

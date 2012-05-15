@@ -8,6 +8,7 @@
 	var seq = 0;	/* static */
 	var period = 0;	/* static */
 	var tm = 0;		/* static */
+
 	Screen.gameover = function() {
 	
 		if (seq == 0) {
@@ -15,7 +16,7 @@
 			seq = 1;
 			period = Game.period; /* save period, */
 			Game.period = 50;     /* and use our own */
-	//		game_setmusic("sounds/gameover.wav", 1);
+			Game.setmusic("WAV_GAMEOVER", 1);
 		}
 	
 		switch (seq) {

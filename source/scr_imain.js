@@ -43,7 +43,7 @@
 			period = Game.period;
 			Game.period = 50;
 			Game.rects = [Draw.SCREENRECT];
-//			game_setmusic("sounds/tune5.wav", -1);
+			Game.setmusic("WAV_TUNE5", -1);
 		}
 		
 		 switch (seq) {

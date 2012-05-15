@@ -69,7 +69,8 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 	ERick.gozombie = function() {
 		/* already zombie? */
 		if (E_RICK_STTST(E_RICK_STZOMBIE)) { return; }
-	
+		Syssnd.play("WAV_DIE", 1);
+
 		E_RICK_STSET(E_RICK_STZOMBIE);
 		offsy = -0x0300;
 		offsx = (E_RICK_ENT.x > 0x80 ? -3 : +3);
@@ -252,6 +253,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 			if ((env1 & MAP_EFLG_SPAD) && offsy >= 0X0200) {
 				offsy = (Control.status & CONTROL_UP) ? 0xf800 : 0x00fe - offsy;
 				goto_horiz();
+				Syssnd.play("WAV_PAD", 1);
 				return;
 			}
 	
@@ -338,6 +340,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 				}
 				offsy = -0x0580;  /* jump */
 				ylow = 0;
+				Syssnd.play("WAV_JUMP", 1);
 				goto_horiz();
 				return;
 			}
@@ -400,6 +403,9 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 					if (!(env1 & (MAP_EFLG_VERT|MAP_EFLG_CLIMB))) {
 						/* reached end of climb zone */
 						offsy = (Control.status & CONTROL_UP) ? -0x0300 : 0x0100;
+						if (Control.status & CONTROL_UP) {
+							Syssnd.play("WAV_JUMP", 1);
+						}
 						E_RICK_STRST(E_RICK_STCLIMB);
 						return;
 					}
@@ -470,7 +476,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		if (E_RICK_STTST(E_RICK_STSTOP)) {
 			E_RICK_ENT.sprite = (Game.dir ? 0x17 : 0x0B);
 			if (!static_stopped) {
-				//syssnd_play(WAV_STICK, 1);
+				Syssnd.play("WAV_STICK", 1);
 				static_stopped = true;
 			}
 			return;
@@ -486,7 +492,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		if (E_RICK_STTST(E_RICK_STCLIMB)) {
 			E_RICK_ENT.sprite = (((E_RICK_ENT.x ^ E_RICK_ENT.y) & 0x04) ? 0x18 : 0x0c);
 			seq = (seq + 1) & 0x03;
-			//if (seq == 0) syssnd_play(WAV_WALK, 1);
+			if (seq == 0)  { Syssnd.play("WAV_WALK", 1); }
 			return;
 		}
 	
@@ -494,7 +500,7 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 			E_RICK_ENT.sprite = (Game.dir ? 0x13 : 0x07);
 			if (E_RICK_ENT.x & 0x04) E_RICK_ENT.sprite++;
 			seq = (seq + 1) & 0x03;
-			//if (seq == 0) syssnd_play(WAV_CRAWL, 1);
+			if (seq == 0) { Syssnd.play("WAV_CRAWL", 1); }
 			return;
 		}
 	
@@ -506,10 +512,10 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		seq++;
 	
 		if (seq >= 0x14) {
-			//syssnd_play(WAV_WALK, 1);
+			Syssnd.play("WAV_WALK", 1);
 			seq = 0x04;
 		} else if (seq == 0x0C) {
-			//syssnd_play(WAV_WALK, 1);
+			Syssnd.play("WAV_WALK", 1);
 		}
 	
 		E_RICK_ENT.sprite = (seq >> 2) + 1 + (Game.dir ? 0x0c : 0x00);

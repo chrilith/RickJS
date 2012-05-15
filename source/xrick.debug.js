@@ -10,6 +10,7 @@
 			<script src="' + dir + 'sysvid.js"></script> \
 			<script src="' + dir + 'sysarg.js"></script> \
 			<script src="' + dir + 'sysevt.js"></script> \
+			<script src="' + dir + 'syssnd.js"></script> \
 			<script src="' + dir + 'game.js"></script> \
 			<script src="' + dir + 'draw.js"></script> \
 			<script src="' + dir + 'maps.js"></script> \

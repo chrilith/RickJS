@@ -77,8 +77,9 @@ var E_BOMB_NO = 3,
 			/*
 			 * ticking
 			 */
-	//		if ((e_bomb_ticker & 0x03) == 0x02)
-	//			syssnd_play(WAV_BOMBSHHT, 1);
+			if ((e_bomb_ticker & 0x03) == 0x02) {
+				Syssnd.play("WAV_BOMBSHHT", 1);
+			}
 	
 			/* ST bomb sprites sequence is longer */
 			if (e_bomb_ticker < 40)
@@ -91,7 +92,7 @@ var E_BOMB_NO = 3,
 			/*
 			 * explode
 			 */
-	//		syssnd_play(WAV_EXPLODE, 1);
+			Syssnd.play("WAV_EXPLODE", 1);
 			/* See above: fixing alignment */
 			E_BOMB_ENT.x -= 4;
 			E_BOMB_ENT.y -= 5;

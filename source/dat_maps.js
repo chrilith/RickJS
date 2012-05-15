@@ -26,11 +26,11 @@
 //	char *tune;	/* map tune */
 //} map_t;
 Map.maps = [
-	{ x: 0x0008, y: 0x008b, row: 0x0008, submap: 0x0000, tune: "sounds/tune0.wav" },
-	{ x: 0x0008, y: 0x008b, row: 0x0068, submap: 0x0009, tune: "sounds/tune1.wav" },
-	{ x: 0x0010, y: 0x008b, row: 0x0010, submap: 0x0014, tune: "sounds/tune2.wav" },
-	{ x: 0x0010, y: 0x008b, row: 0x0010, submap: 0x0026, tune: "sounds/tune3.wav" },
-	{ x: 0x0074, y: 0x00c8, row: 0x0008, submap: 0x0026, tune: "sounds/tune4.wav" }
+	{ x: 0x0008, y: 0x008b, row: 0x0008, submap: 0x0000, tune: "WAV_TUNE0" },
+	{ x: 0x0008, y: 0x008b, row: 0x0068, submap: 0x0009, tune: "WAV_TUNE1" },
+	{ x: 0x0010, y: 0x008b, row: 0x0010, submap: 0x0014, tune: "WAV_TUNE2" },
+	{ x: 0x0010, y: 0x008b, row: 0x0010, submap: 0x0026, tune: "WAV_TUNE3" },
+	{ x: 0x0074, y: 0x00c8, row: 0x0008, submap: 0x0026, tune: "WAV_TUNE4" }
 ];
 
 /*

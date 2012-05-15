@@ -11,7 +11,7 @@
 		if (Ent.ents[e].seq == 0) {
 			if (ERick.boxtest(e)) {
 				Game.score += 500;
-				//syssnd_play(WAV_BONUS, 1);
+				Syssnd.play("WAV_BONUS", 1);
 				Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 				Ent.ents[e].seq = 1;
 				Ent.ents[e].sprite = 0xad;

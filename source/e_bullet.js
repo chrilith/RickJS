@@ -25,7 +25,7 @@ var E_BULLET_NO  = 2,
 			EBullet.offsx = 0x08;
 			E_BULLET_ENT.sprite = 0x20;
 		}
-		//syssnd_play(WAV_BULLET, 1);
+		Syssnd.play("WAV_BULLET", 1);
 	}
 
 	/*

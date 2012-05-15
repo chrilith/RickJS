@@ -48,7 +48,7 @@ var SCREEN_TIMEOUT = 4000;
 
 				Game.rects = [Draw.SCREENRECT];
 
-				//game_setmusic(map_maps[game_map].tune, 1);
+				Game.setmusic(Map.maps[Game.map].tune, 1);
 
 				seq = 1;
 				fading = GE.IN;

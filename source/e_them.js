@@ -50,8 +50,8 @@ var TYPE_1A = (0x00),
 	//#define offsx c1
 		Ent.ents[e].n = 0x47;  /* zombie entity */
 		Ent.ents[e].front = true;
-		Ent.ents[e].offsy = -0x0400;
-		//syssnd_play(WAV_DIE, 1);
+		Ent.ents[e].offsy = -0x0400;	// CHECKME: should be like Rick?
+		Syssnd.play("WAV_DIE", 1);
 	
 		Game.score += 50;
 		if (Ent.ents[e].flags & ENT_FLG_ONCE) {
@@ -666,6 +666,14 @@ var TYPE_1A = (0x00),
 					if (E_RICK_STTST(E_RICK_STZOMBIE)) {
 						return;
 					}
+					/*
+					* FIXME the sound should come from a table, there are 10 of them
+					* but I dont have the table yet. must rip the data off the game...
+					* FIXME is it 8 of them, not 10?
+					* FIXME testing below...
+					*/
+					Syssnd.play("WAV_ENTITY" + ((Ent.ents[e].trigsnd & 0x1F) - 0x14), 1);
+					/*syssnd_play(WAV_ENTITY[0], 1);*/
 		
 					Ent.ents[e].n &= ~ENT_LETHAL;
 					if (Ent.ents[e].flags & ENT_FLG_LETHALI) {

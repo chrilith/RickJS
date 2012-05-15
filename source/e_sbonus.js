@@ -19,6 +19,7 @@
 			ESbonus.counting = true;  /* 6DD5 */
 			ESbonus.counter = 0x1e;  /* 6DDB */
 			ESbonus.bonus = 2000;    /* 291A-291D */
+			Syssnd.play("WAV_SBONUS1", 1);
 		}
 	}
 	
@@ -39,6 +40,7 @@
 			ESbonus.counting = false;  /* stop counting */
 			Ent.ents[e].n = 0;  /* deactivate entity */
 			Game.score += ESbonus.bonus;  /* add bonus to score */
+			Syssnd.play("WAV_SBONUS2", 1);
 			/* make sure the entity won't be activated again */
 			Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 		} else {

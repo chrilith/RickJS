@@ -37,7 +37,7 @@ var SEQ_INIT = 0x0A;
 			 */
 			if (ERick.boxtest(e)) {
 				/* rick: collect bombs or bullets and stop */
-	//			syssnd_play(WAV_BOX, 1);
+				Syssnd.play("WAV_BOX", 1);
 	
 				if (Ent.ents[e].n == 0x10) {
 					Game.bombs = GAME_BOMBS_INIT;
@@ -70,7 +70,7 @@ var SEQ_INIT = 0x0A;
 	function explode(e) {
 		Ent.ents[e].cnt = SEQ_INIT;
 		Ent.ents[e].n |= ENT_LETHAL;
-	//	syssnd_play(WAV_EXPLODE, 1);
+		Syssnd.play("WAV_EXPLODE", 1);
 	}
 
 	

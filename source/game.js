@@ -92,8 +92,31 @@ var LEFT = 1,
 	 */
 	var isave_frow,
 		game_state,
+		music_snd,
 		fading;
+
+	/*
+	* Music
+	*/
+	Game.setmusic = function(name, loop) {
+		var channel;
+
+		if (music_snd) {
+			Game.stopmusic();
+		}
+		music_snd = Syssnd.load(name);
+		if (music_snd) {
+			//music_snd->dispose = TRUE; /* music is always "fire and forget" */
+			channel = Syssnd.play(name, loop);
+		}
+	}
 	
+	
+	Game.stopmusic = function() {
+		Syssnd.stopsound(music_snd);
+		music_snd = null;
+	}
+		
 	/*
 	 * Main loop
 	 */
@@ -232,7 +255,7 @@ var LEFT = 1,
 					if (!(Control.status & CONTROL_PAUSE)) {
 						Game.waitevt = false;
 						Screen.pause(false);
-			//			syssnd_pause(FALSE, FALSE);
+						Syssnd.pause(false, false);
 						game_state = PLAY2;
 					}
 					return;
@@ -245,9 +268,11 @@ var LEFT = 1,
 
 				case PLAY1:
 					if (Control.status & CONTROL_PAUSE) {
+						Syssnd.pause(true, false);
 						Game.waitevt = true;
 						game_state = PAUSE_PRESSED1;
 					} else if (Control.active == false) {
+						Syssnd.pause(true, false);
 						Game.waitevt = true;
 						Screen.pause(true);
 						game_state = PAUSED;
@@ -294,7 +319,7 @@ var LEFT = 1,
 					break;
 
 				case CHAIN_MAP:
-					switch (Screen.introMap()) {
+					switch (Screen.introMap(timer)) {
 						case SCREEN_RUNNING:
 							return;
 			

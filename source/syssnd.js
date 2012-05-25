@@ -48,12 +48,13 @@
 	 * Stop a sound
 	 */
 	Syssnd.stopsound = function(sound) {
-		var i;
-	
-		if (!sound) { return; }
-		Snd.getItem(sound).pause();
+			if (!sound) { return; }
+		var mus = Snd.getItem(sound);
+		if (mus) {
+			mus.pause();
+		}
 	}
-	
+
 	/*
 	 * Load a sound.
 	 */

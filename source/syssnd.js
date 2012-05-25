@@ -30,7 +30,7 @@
 		// TODO
 		var snd = Snd.getItem(name);
 		if (snd) {
-			snd.play();
+			snd.play(G.Convert.toUInt16(loop));
 		}
 	}
 

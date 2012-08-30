@@ -57,8 +57,8 @@ XRick = {
 		Data.loadItem("tiles_data", "data/tiles.png");
 		Data.loadItem("sprites_data", "data/sprites.png");
 
-		var ext = G.Sound.isSupported(G.Sound.MP3) != "maybe" ? ".mp3" :
-					G.Sound.isSupported(G.Sound.WAVE) != "maybe" ? ".wav" : ".ogg";
+		var ext = G.Sound.isSupported(G.Sound.MP3) ? ".mp3" :
+					G.Sound.isSupported(G.Sound.WAVE) ? ".wav" : ".ogg";
 		
 		Snd.loadItem("WAV_GAMEOVER", "sound/gameover" + ext);
 		Snd.loadItem("WAV_SBONUS2", "sound/sbonus2" + ext);

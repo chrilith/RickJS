@@ -3,9 +3,13 @@
 	<head>
 		<title>RickJS, a JavaScript port of XRick using HTML5</title>
 		<style>
-			body { margin:0; padding:0;background:#000 }
+			body { margin:0; padding:0; background:#000; font-family: sans-serif }
+			.fr { float:right }
 			#container { margin:100px auto; width:640px; height:400px }
 			#container canvas { width:100%; height:100% }
+			#nfo { width:640px; margin:0 auto; font-size:10px; color:#666 }
+			#nfo a { text-decoration:none; color:inherit }
+			#nfo a:hover { text-decoration:underline }
 		</style>
 
 		<script>
@@ -34,5 +38,12 @@
 
 		</script>	
 	</head>
-<body><div id="container"></div></body>
+<body>
+	<div id="container"></div>
+	<div id="nfo">
+		<div class="fr">RickJS, based on <a href="http://www.bigorno.net/xrick/">xrick</a> by BigOrno</div>
+		Powered by <a href="http://www.gamalto.com/">Gamalto</a>
+	</div>
+
+</body>
 </html>

@@ -16,6 +16,7 @@ var	SYSVID_WIDTH	= 320;
 		var s = new G.Screen(SYSVID_WIDTH, SYSVID_HEIGHT);
 		s.setActive();
 		s.enableFiltering(false);
+		s.setStretch(G.Screen.STRETCH_UNIFORM);
 		return s;
 	}
 	

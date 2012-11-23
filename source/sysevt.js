@@ -2,14 +2,61 @@
 (function() {
 	/* local
 	 ********/
-	var MAN = G.EventManager,
+	var gamepad, MAN = G.EventManager,
 		eventMan = new G.EventManager(MAN.BIT_KEYBOARD|MAN.BIT_KBICADE);
 	
+	function TSTBIT(b) {
+		return (Control.status && b) == b;
+	}
 	function SETBIT(b) {
 		Control.status |= (b);
 	}
 	function CLRBIT(b) {
 		Control.status &= ~(b);
+	}
+	
+	function processGamepad() {
+		if (!gamepad) { return; }
+
+		CLRBIT(CONTROL_UP);
+		CLRBIT(CONTROL_DOWN);
+		CLRBIT(CONTROL_LEFT);
+		CLRBIT(CONTROL_RIGHT);
+		CLRBIT(CONTROL_FIRE);
+		
+		if (gamepad.buttons[0]) {
+			SETBIT(CONTROL_FIRE);
+		}
+
+		if (gamepad.axes[0] || gamepad.axes[1]) {
+			var v = new G.Vector(gamepad.axes[0], gamepad.axes[1]),
+				a = v.getAngle() * 180 / Math.PI,
+				s = v.getLength();
+			
+			a = (a + 22.5) % 360 / 45 | 0;
+			
+			if (a == 0) {
+				SETBIT(CONTROL_UP);
+			} else if (a == 1) {
+				SETBIT(CONTROL_UP);
+				SETBIT(CONTROL_RIGHT);
+			} else if (a == 2) {
+				SETBIT(CONTROL_RIGHT);
+			} else if (a == 3) {
+				SETBIT(CONTROL_RIGHT);
+				SETBIT(CONTROL_DOWN);
+			} else if (a == 4) {
+				SETBIT(CONTROL_DOWN);
+			} else if (a == 5) {
+				SETBIT(CONTROL_DOWN);
+				SETBIT(CONTROL_LEFT);
+			} else if (a == 6) {
+				SETBIT(CONTROL_LEFT);
+			} else if (a == 7) {
+				SETBIT(CONTROL_LEFT);
+				SETBIT(CONTROL_UP);
+			}
+		}
 	}
 	
 	function processEvent(event) {
@@ -97,10 +144,35 @@
 
 	/* global
 	 *********/
+	Sysevt.init = function() {
+		var pad = document.getElementById("gamepad"),
+			s1, s2, S = G.Shape;
+
+		if (G.TouchGamepad.isSupported()) {
+			pad.style.display = "block";
+			gamepad = new G.TouchGamepad("pad", pad);
+			if (pad.offsetHeight == 120) {
+				s1 = new G.Circle(65, 0, 55);
+				s2 = new G.Circle(-50, 0, 30);
+			} else {
+				s1 = new G.Circle(100, 0, 90);
+				s2 = new G.Circle(-100, 0, 40);
+			}
+			gamepad.addAxes(s1, S.ALIGN_LEFT | S.ALIGN_MIDDLE);
+			gamepad.addButton(s2, S.ALIGN_RIGHT | S.ALIGN_MIDDLE);
+			gamepad.setActive(true);
+		}
+	}
+
 	Sysevt.poll = function() {
 		var e;
-		while ((e = eventMan.poll())) {
-			processEvent(e);
+		
+		if (!gamepad || (!gamepad.connected)) {
+			while ((e = eventMan.poll())) {
+				processEvent(e);
+			}
+		} else {
+			processGamepad();
 		}
 	}
 	

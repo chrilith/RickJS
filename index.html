@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<title>RickJS, a JavaScript port of XRick using HTML5</title>
 		<style>
 			html { height: 100%; }
@@ -8,10 +10,20 @@
 			body { height: 100%; margin:0; padding:0; background:#000; font-family: sans-serif }
 			.fr { float:right }
 			#parent { display:table; width:100%; height: 100%; }
-			#container { display:table-cell; width:100%; height:100%; overflow: hidden;background: #333;text-align: center; vertical-align: middle }
+			#container { display:table-cell; width:100%; height:100%; overflow: hidden;background: #000;text-align: center; vertical-align: middle }
 			#nfo { width:100%; margin:0 auto; font-size:10px; color:#666; position: absolute; bottom:0; }
 			#nfo a { text-decoration:none; color:inherit }
 			#nfo a:hover { text-decoration:underline }
+			
+			#gamepad { position: absolute; bottom: 15px; left: 0; right: 0; height: 200px; display:none;
+						background: url("data/control_left.png") center left no-repeat, url("data/control_right.png") center right no-repeat }
+			
+			@media screen and (max-width: 500px) {
+				#container { vertical-align: top; }
+				#container canvas { margin-top: 10px; }
+				#gamepad { height: 120px; display:none;
+							background:  url("data/control_sleft.png") center left no-repeat, url("data/control_sright.png") center right no-repeat }
+			}
 		</style>
 
 		<script>
@@ -46,6 +58,7 @@
 		<div class="fr">RickJS, based on <a href="http://www.bigorno.net/xrick/">xrick</a> by BigOrno</div>
 		Powered by <a href="http://www.gamalto.com/">Gamalto</a>
 	</div>
+	<div id="gamepad"></div>
 
 </body>
 </html>

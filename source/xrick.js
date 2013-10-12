@@ -45,9 +45,10 @@ XRick = {
 		Data.pushItem("sprites_data", "data/sprites.png");
 		
 		Data.load().then(function() {
-
-			var ext = G.Sound.isSupported(G.Sound.MP3) ? ".mp3" :
-						G.Sound.isSupported(G.Sound.WAVE) ? ".wav" : ".ogg";
+			var pool = G.SoundPool; 
+			var ext = pool.isSupported(pool.MP3) ? ".mp3" :
+						pool.isSupported(pool.WAVE) ? ".wav" : ".ogg";
+console.log("data ok next", ext);
 			
 			Snd.pushItem("WAV_GAMEOVER", "sound/gameover" + ext);
 			Snd.pushItem("WAV_SBONUS2", "sound/sbonus2" + ext);
@@ -82,15 +83,25 @@ XRick = {
 			
 			return Snd.load();
 
+		}, function(e) {
+			console.log("error", e);
 		}).then(function() {
+
+			Snd.getItem("WAV_STICK").priority = -1;
+			Snd.getItem("WAV_WALK").priority = -1;
+			Snd.getItem("WAV_CRAWL").priority = -1;
+			Snd.getItem("WAV_JUMP").priority = -1;
+
 			Tiles.data = [];
-			Tiles.data[0] = new G.TileSet(Data.getItem("tiles_data"), new G.Rect(0, 0 * 8 * 256, 8, 8 * 256), 256, 8, 8);
-			Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), new G.Rect(0, 1 * 8 * 256, 8, 8 * 256), 256, 8, 8);
-			Tiles.data[2] = new G.TileSet(Data.getItem("tiles_data"), new G.Rect(0, 2 * 8 * 256, 8, 8 * 256), 256, 8, 8);
+			Tiles.data[0] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 0 * 8 * 256, 8, 8 * 256));
+			Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 1 * 8 * 256, 8, 8 * 256));
+			Tiles.data[2] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 2 * 8 * 256, 8, 8 * 256));
 			
-			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data"), null, SPRITES_NBR_SPRITES, 32, 21);
+			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data"), 32, 21, SPRITES_NBR_SPRITES, null);
 
 			XRick.main();
+		}, function(e) {
+			console.log("error2", e);
 		});
 				
 		Sysarg.args_map = 0;
@@ -99,4 +110,4 @@ XRick = {
 	
 };
 
-Gamalto.init().then(XRick.init);
+gamalto.init(XRick.init);

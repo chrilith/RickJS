@@ -16,6 +16,14 @@
  */
 
 (function() {
+	
+	var mixer,
+		A = G.AudioMixer;
+	
+	Syssnd.init = function() {
+		mixer = new G.AudioMixer(4, A.BIT_HTML5AUDIO);
+	}
+	
 	/*
 	 * Play a sound
 	 *
@@ -30,7 +38,8 @@
 		// TODO
 		var snd = Snd.getItem(name);
 		if (snd) {
-			snd.play(G.Convert.toUInt16(loop));
+			//snd.play(G.Convert.toUInt16(loop));
+			mixer.playSound(snd, G.Convert.toUInt16(loop));
 		}
 	}
 
@@ -48,11 +57,12 @@
 	 * Stop a sound
 	 */
 	Syssnd.stopsound = function(sound) {
-			if (!sound) { return; }
+		mixer.stopAll();
+/*		if (!sound) { return; }
 		var mus = Snd.getItem(sound);
 		if (mus) {
 			mus.pause();
-		}
+		}*/
 	}
 
 	/*

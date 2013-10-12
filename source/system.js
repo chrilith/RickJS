@@ -29,10 +29,11 @@
 	 * Initialize system
 	 */
 	Sys.init = function() {
-		Gamalto.setContainer("container");
+		gamalto.setContainer("container");
 		Sysarg.init();
 		Sysvid.init();
 		Sysevt.init();
+		Syssnd.init();
 	}
 
 /* EOF */

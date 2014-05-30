@@ -51,6 +51,7 @@ var	SYSVID_WIDTH	= 320;
 			return;
 		}
 		screen.redraw(buffer, 0, 0, rects);
+		screen.refresh();
 	}
 
 	Sysvid.toggle_scanlines = function(isOn) {

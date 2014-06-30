@@ -510,14 +510,14 @@ function E_RICK_STRST(X) { ERick.state &= ~(X); }
 		}
 	
 		seq++;
-	
+
 		if (seq >= 0x14) {
 			Syssnd.play("WAV_WALK", 1);
 			seq = 0x04;
 		} else if (seq == 0x0C) {
 			Syssnd.play("WAV_WALK", 1);
 		}
-	
+
 		E_RICK_ENT.sprite = (seq >> 2) + 1 + (Game.dir ? 0x0c : 0x00);
 	}
 

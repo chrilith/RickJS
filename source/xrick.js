@@ -92,12 +92,14 @@ console.log("data ok next", ext);
 			Snd.getItem("WAV_CRAWL").priority = -1;
 			Snd.getItem("WAV_JUMP").priority = -1;
 
+
+			var size = new G.Size(8, 8);
 			Tiles.data = [];
-			Tiles.data[0] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 0 * 8 * 256, 8, 8 * 256));
-			Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 1 * 8 * 256, 8, 8 * 256));
-			Tiles.data[2] = new G.TileSet(Data.getItem("tiles_data"), 8, 8, 256, new G.Rect(0, 2 * 8 * 256, 8, 8 * 256));
+			Tiles.data[0] = new G.TileSet(Data.getItem("tiles_data"), size).addSections(256, new G.Rect(0, 0 * 8 * 256, 8, 8 * 256));
+			Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), size).addSections(256, new G.Rect(0, 1 * 8 * 256, 8, 8 * 256));
+			Tiles.data[2] = new G.TileSet(Data.getItem("tiles_data"), size).addSections(256, new G.Rect(0, 2 * 8 * 256, 8, 8 * 256));
 			
-			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data"), 32, 21, SPRITES_NBR_SPRITES, null);
+			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data")).addSections(SPRITES_NBR_SPRITES, null, new G.Size(32, 21));
 
 			XRick.main();
 		}, function(e) {
@@ -110,4 +112,4 @@ console.log("data ok next", ext);
 	
 };
 
-gamalto.init(XRick.init);
+Gamalto.init(XRick.init);

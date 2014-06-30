@@ -24,7 +24,7 @@ var	SCREEN_RUNNING	= 0,
 		switch (seq) {
 			case 1:
 				if (wait++ > 0x2) {
-					Game.setmusic("WAV_BULLET", 1);
+					Syssnd.play("WAV_BULLET", 1);
 					seq = 2;
 					wait = 0;
 				}

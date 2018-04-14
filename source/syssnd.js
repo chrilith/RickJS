@@ -21,7 +21,7 @@
 		A = G.AudioMixer;
 	
 	Syssnd.init = function() {
-		mixer = new G.AudioMixer(4, A.BIT_HTML5AUDIO);
+		mixer = Snd.mixer;
 	}
 	
 	/*
@@ -39,7 +39,7 @@
 		var snd = Snd.getItem(name);
 		if (snd) {
 			//snd.play(G.Convert.toUInt16(loop));
-			mixer.playSound(snd, G.Convert.toUInt16(loop));
+			mixer.playSound(snd, G.Convert.toUInt16(loop) - 1);
 		}
 	}
 

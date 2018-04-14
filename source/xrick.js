@@ -1,3 +1,6 @@
+// Fix problem with use of old version of Gamalto (and some internal problems too...)
+G.Vector = G.Vector2;
+
 var
 
 Sys = {},
@@ -36,7 +39,8 @@ XRick = {
 		var nb = 0;
 		
 		Data = new G.BitmapLibrary();
-		Snd = new G.SoundPool();
+		var mixer = G.AudioMixer.create(4, G.AudioMixer.BIT_HTML5AUDIO);
+		Snd = new G.SoundPool(mixer);
 
 		Data.pushItem("pic_splash", "data/title.png");
 		Data.pushItem("pic_haf", "data/haf.png");

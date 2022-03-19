@@ -3,7 +3,7 @@
 	/* local
 	 ********/
 	var gamepad, MAN = G.EventManager,
-		eventMan = new G.EventManager(MAN.BIT_KEYBOARD|MAN.BIT_KBICADE);
+		eventMan = new G.EventManager(MAN.BIT_KEYBOARD/*|MAN.BIT_KBICADE*/);
 	
 	function TSTBIT(b) {
 		return (Control.status && b) == b;
@@ -145,7 +145,7 @@
 	/* global
 	 *********/
 	Sysevt.init = function() {
-		var pad = document.getElementById("gamepad"),
+/*		var pad = document.getElementById("gamepad"),
 			s1, s2, S = G.Shape;
 
 		if (G.TouchGamepad.isSupported()) {
@@ -162,12 +162,13 @@
 			gamepad.addButton(s2, S.ALIGN_RIGHT | S.ALIGN_MIDDLE);
 			gamepad.setActive(true);
 		}
+*/
 	}
 
 	Sysevt.poll = function() {
 		var e;
 		
-		if (!gamepad || (!gamepad.connected)) {
+		if (!gamepad || (!gamepad.connected)) {
 			while ((e = eventMan.poll())) {
 				processEvent(e);
 			}

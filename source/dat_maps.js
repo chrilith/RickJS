@@ -25,7 +25,7 @@
 //	U16 submap;	/* initial submap */
 //	char *tune;	/* map tune */
 //} map_t;
-Map.maps = [
+World.maps = [
 	{ x: 0x0008, y: 0x008b, row: 0x0008, submap: 0x0000, tune: "WAV_TUNE0" },
 	{ x: 0x0008, y: 0x008b, row: 0x0068, submap: 0x0009, tune: "WAV_TUNE1" },
 	{ x: 0x0010, y: 0x008b, row: 0x0010, submap: 0x0014, tune: "WAV_TUNE2" },
@@ -42,7 +42,7 @@ Map.maps = [
 //	U16 connect;         /* first connection */
 //	U16 mark;            /* first entity mark */
 //} submap_t;
-Map.submaps/*[MAP_NBR_SUBMAPS]*/ = [
+World.submaps/*[MAP_NBR_SUBMAPS]*/ = [
 	{page: 0x0000, bnum: 0x0000, connect: 0x0000, mark: 0x0000},
 	{page: 0x0000, bnum: 0x0078, connect: 0x0003, mark: 0x0005},
 	{page: 0x0000, bnum: 0x0150, connect: 0x0006, mark: 0x0011},
@@ -103,7 +103,7 @@ typedef struct {
   U8 rowin;
 } connect_t;
 */
-Map.connect/*[MAP_NBR_CONNECT]*/ = [
+World.connect/*[MAP_NBR_CONNECT]*/ = [
 	/* map 0 */
 	
 	/* map 0 submap 0 */
@@ -317,7 +317,7 @@ Map.connect/*[MAP_NBR_CONNECT]*/ = [
 	{ dir: 0xff, rowout: 0x00, submap: 0x00, rowin: 0x00 }
 ];
 
-Map.bnums/*[MAP_NBR_BNUMS]*/ = [
+World.bnums/*[MAP_NBR_BNUMS]*/ = [
 	0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46,
 	0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46,
 	0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46, 0x46,
@@ -1343,7 +1343,7 @@ Map.bnums/*[MAP_NBR_BNUMS]*/ = [
  * blocks - one block is 4 by 4 tiles.
  */
 //typedef U8 block_t[0x10];
-Map.blocks/*[MAP_NBR_BLOCKS]*/ = [
+World.blocks/*[MAP_NBR_BLOCKS]*/ = [
 	[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
 	[0x29, 0x2a, 0x2d, 0x2e, 0x2b, 0x2c, 0x2f, 0x30,
@@ -1868,7 +1868,7 @@ Map.blocks/*[MAP_NBR_BLOCKS]*/ = [
 //	U8 xy;  /* bits XXXX XYYY (from b03) with X->x, Y->y */
 //	U8 lt;  /* bits XXXX XNNN (from b04) with X->trig_x, NNN->lat & trig_y */
 //} mark_t;
-Map.marks/*[MAP_NBR_MARKS]*/ = [
+World.marks/*[MAP_NBR_MARKS]*/ = [
 	{ row: 0x18, ent: 0x16, flags: 0x00, xy: 0x08, lt: 0x08}, /* 0 */
 	{ row: 0x18, ent: 0x2a, flags: 0x88, xy: 0x01, lt: 0x28},
 	{ row: 0x38, ent: 0x04, flags: 0xf0, xy: 0x15, lt: 0x29},
@@ -2394,7 +2394,7 @@ Map.marks/*[MAP_NBR_MARKS]*/ = [
 	{ row: 0xff, ent: 0x00, flags: 0x00, xy: 0x00, lt: 0x00}
 ];
 
-Map.eflg_c/*[MAP_NBR_EFLGC]*/ = [ /* compressed */
+World.eflg_c/*[MAP_NBR_EFLGC]*/ = [ /* compressed */
 
 	0x4d, 0x00, 0x0e, 0x02, 0x04, 0x04, 0x57, 0x08,
 	0x08, 0x18, 0x03, 0x68, 0x3b, 0x48, 0x04, 0x80,

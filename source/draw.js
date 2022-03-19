@@ -202,7 +202,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	
 		i = 0x1f;
 		im = x - (x & 0xfff8);
-		flg = Map.eflg[Map.map[(y + r) >> 3][(x + 0x1f)>> 3]];
+		flg = World.eflg[World.map[(y + r) >> 3][(x + 0x1f)>> 3]];
 	
 	#define LOOP(N, C0, C1) \
 		d = sprites_data[number][g + N]; \
@@ -267,7 +267,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		for (r = 0; r < rmax; r++) {  /* for each row */
 			Draw.setfb(xs, 8 + ys + r * 8);
 			for (c = 0; c < cmax; c++) {  /* for each column */
-				Draw.tile(Map.map[ymap + r][xmap + c]);
+				Draw.tile(World.map[ymap + r][xmap + c]);
 			}
 		}
 	}
@@ -280,12 +280,12 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	Draw.map = function() {
 		var i, j;
 		
-		Draw.tilesBank = Map.tilesBank;
+		Draw.tilesBank = World.tilesBank;
 	
 		for (i = 0; i < 0x18; i++) {  /* 0x18 rows */
 			Draw.setfb(0x20, 8 + (i * 8));
 			for (j = 0; j < 0x20; j++)  /* 0x20 tiles per row */
-				Draw.tile(Map.map[i + 8][j]);
+				Draw.tile(World.map[i + 8][j]);
 		}
 	}
 	/*

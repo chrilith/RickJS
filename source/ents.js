@@ -221,11 +221,11 @@ var ENT_XRICK,			// defined later
 		* is visible, i.e. which has a row greater than the
 		* first row (marks being ordered by row number).
 		*/
-		for (m = Map.submaps[Game.submap].mark;
-			Map.marks[m].row != 0xff && Map.marks[m].row < frow;
+		for (m = World.submaps[Game.submap].mark;
+			World.marks[m].row != 0xff && World.marks[m].row < frow;
 			m++) {};
 	
-		if (Map.marks[m].row == 0xff) { /* none found */
+		if (World.marks[m].row == 0xff) { /* none found */
 			return;
 		}
 	
@@ -235,11 +235,11 @@ var ENT_XRICK,			// defined later
 		* row (marks still being ordered by row number).
 		*/
 		for (;
-			Map.marks[m].row != 0xff && Map.marks[m].row < lrow;
+			World.marks[m].row != 0xff && World.marks[m].row < lrow;
 			m++) {
 	
 			/* ignore marks that are not active */
-			if (Map.marks[m].ent & MAP_MARK_NACT) {
+			if (World.marks[m].ent & MAP_MARK_NACT) {
 				continue;
 			}
 	
@@ -273,8 +273,8 @@ var ENT_XRICK,			// defined later
 			 * 47              zombie
 			 */
 	
-			if (!(Map.marks[m].flags & ENT_FLG_STOPRICK)) {
-				if (Map.marks[m].ent >= 0x10) {
+			if (!(World.marks[m].flags & ENT_FLG_STOPRICK)) {
+				if (World.marks[m].ent >= 0x10) {
 					/* boxes, bonuses and type 3 e_them go to slot 4-8 */
 					/* (c1 set to 0 -> all type 3 e_them are sleeping) */
 					tmp = ent_creat1(e); e = tmp.e;	// should be pointer => *e
@@ -296,8 +296,8 @@ var ENT_XRICK,			// defined later
 			 * initialize the entity
 			 */
 			Ent.ents[e].mark = m;
-			Ent.ents[e].flags = Map.marks[m].flags;
-			Ent.ents[e].n = Map.marks[m].ent;
+			Ent.ents[e].flags = World.marks[m].flags;
+			Ent.ents[e].n = World.marks[m].ent;
 		
 			/*
 			 * if entity is to be already running (i.e. not asleep and waiting
@@ -308,9 +308,9 @@ var ENT_XRICK,			// defined later
 				Ent.ents[e].n |= ENT_LETHAL;
 			}
 		
-			Ent.ents[e].x = Map.marks[m].xy & 0xf8;
+			Ent.ents[e].x = World.marks[m].xy & 0xf8;
 		
-			y = (Map.marks[m].xy & 0x07) + (Map.marks[m].row & 0xf8) - Map.frow;
+			y = (World.marks[m].xy & 0x07) + (World.marks[m].row & 0xf8) - World.frow;
 			y <<= 3;
 			if (!(Ent.ents[e].flags & ENT_FLG_STOPRICK)) {
 				y += 3;
@@ -322,11 +322,11 @@ var ENT_XRICK,			// defined later
 		
 			/*Ent.ents[e].w0C = 0;*/  /* in ASM code but never used */
 		
-			Ent.ents[e].w = Ent.entdata[Map.marks[m].ent].w;
-			Ent.ents[e].h = Ent.entdata[Map.marks[m].ent].h;
-			Ent.ents[e].sprbase = Ent.entdata[Map.marks[m].ent].spr;
-			Ent.ents[e].step_no_i = Ent.entdata[Map.marks[m].ent].sni;
-			Ent.ents[e].trigsnd = Ent.entdata[Map.marks[m].ent].snd; // (U8)
+			Ent.ents[e].w = Ent.entdata[World.marks[m].ent].w;
+			Ent.ents[e].h = Ent.entdata[World.marks[m].ent].h;
+			Ent.ents[e].sprbase = Ent.entdata[World.marks[m].ent].spr;
+			Ent.ents[e].step_no_i = Ent.entdata[World.marks[m].ent].sni;
+			Ent.ents[e].trigsnd = Ent.entdata[World.marks[m].ent].snd; // (U8)
 
 			/*
 			 * FIXME what is this? when all trigger flags are up, then
@@ -342,16 +342,16 @@ var ENT_FLG_TRIGGERS =
 		(ENT_FLG_TRIGBOMB|ENT_FLG_TRIGBULLET|ENT_FLG_TRIGSTOP|ENT_FLG_TRIGRICK);
 			if ((Ent.ents[e].flags & ENT_FLG_TRIGGERS) == ENT_FLG_TRIGGERS
 			&& e >= 0x09) {
-				Ent.ents[e].sprbase = (Ent.entdata[Map.marks[m].ent].sni & 0x00ff); // (U8)
+				Ent.ents[e].sprbase = (Ent.entdata[World.marks[m].ent].sni & 0x00ff); // (U8)
 			}
 //#undef ENT_FLG_TRIGGERS
 		
 			Ent.ents[e].sprite = Ent.ents[e].sprbase;
-			Ent.ents[e].trig_x = Map.marks[m].lt & 0xf8;
-			Ent.ents[e].latency = (Map.marks[m].lt & 0x07) << 5;  /* <<5 eq *32 */
+			Ent.ents[e].trig_x = World.marks[m].lt & 0xf8;
+			Ent.ents[e].latency = (World.marks[m].lt & 0x07) << 5;  /* <<5 eq *32 */
 		
-			Ent.ents[e].trig_y = 3 + 8 * ((Map.marks[m].row & 0xf8) - Map.frow +
-									(Map.marks[m].lt & 0x07));
+			Ent.ents[e].trig_y = 3 + 8 * ((World.marks[m].row & 0xf8) - World.frow +
+									(World.marks[m].lt & 0x07));
 		
 			Ent.ents[e].c2 = 0;
 			Ent.ents[e].offsy = 0;
@@ -414,7 +414,7 @@ var ENT_FLG_TRIGGERS =
 		var i;
 		var dx, dy;
 	
-		Draw.tilesBank = Map.tilesBank;
+		Draw.tilesBank = World.tilesBank;
 	
 		/* reset rectangles list */
 		Rects.free(Ent.rects);

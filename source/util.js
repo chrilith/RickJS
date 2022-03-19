@@ -88,57 +88,57 @@
 		if (xx & 0x07) {  /* tiles columns alignment */
 		
 			if (crawl) {
-				rc0 |= (Map.eflg[Map.map[y][x]] &
+				rc0 |= (World.eflg[World.map[y][x]] &
 					(MAP_EFLG_VERT|MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP));
-				rc0 |= (Map.eflg[Map.map[y][x + 1]] &
+				rc0 |= (World.eflg[World.map[y][x + 1]] &
 					(MAP_EFLG_VERT|MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP));
-				rc0 |= (Map.eflg[Map.map[y][x + 2]] &
+				rc0 |= (World.eflg[World.map[y][x + 2]] &
 					(MAP_EFLG_VERT|MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP));
 				y++;
 			}
 	
 			do {
-				rc1 |= (Map.eflg[Map.map[y][x]] &
+				rc1 |= (World.eflg[World.map[y][x]] &
 					(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_FGND|
 						MAP_EFLG_LETHAL|MAP_EFLG_01));
-				rc1 |= (Map.eflg[Map.map[y][x + 1]] &
+				rc1 |= (World.eflg[World.map[y][x + 1]] &
 					(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_FGND|
 						MAP_EFLG_LETHAL|MAP_EFLG_CLIMB|MAP_EFLG_01));
-				rc1 |= (Map.eflg[Map.map[y][x + 2]] &
+				rc1 |= (World.eflg[World.map[y][x + 2]] &
 					(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_FGND|
 						MAP_EFLG_LETHAL|MAP_EFLG_01));
 				y++;
 			} while (--i > 0);
 	
-			rc1 |= (Map.eflg[Map.map[y][x]] &
+			rc1 |= (World.eflg[World.map[y][x]] &
 				(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP|MAP_EFLG_FGND|
 				 MAP_EFLG_LETHAL|MAP_EFLG_01));
-			rc1 |= (Map.eflg[Map.map[y][x + 1]]);
-			rc1 |= (Map.eflg[Map.map[y][x + 2]] &
+			rc1 |= (World.eflg[World.map[y][x + 1]]);
+			rc1 |= (World.eflg[World.map[y][x + 2]] &
 				(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP|MAP_EFLG_FGND|
 				 MAP_EFLG_LETHAL|MAP_EFLG_01));
 		} else {
 	
 			if (crawl) {
-				rc0 |= (Map.eflg[Map.map[y][x]] &
+				rc0 |= (World.eflg[World.map[y][x]] &
 					(MAP_EFLG_VERT|MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP));
-				rc0 |= (Map.eflg[Map.map[y][x + 1]] &
+				rc0 |= (World.eflg[World.map[y][x + 1]] &
 					(MAP_EFLG_VERT|MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_WAYUP));
 				y++;
 			}
 	
 			do {
-				rc1 |= (Map.eflg[Map.map[y][x]] &
+				rc1 |= (World.eflg[World.map[y][x]] &
 					(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_FGND|
 						MAP_EFLG_LETHAL|MAP_EFLG_CLIMB|MAP_EFLG_01));
-				rc1 |= (Map.eflg[Map.map[y][x + 1]] &
+				rc1 |= (World.eflg[World.map[y][x + 1]] &
 					(MAP_EFLG_SOLID|MAP_EFLG_SPAD|MAP_EFLG_FGND|
 						MAP_EFLG_LETHAL|MAP_EFLG_CLIMB|MAP_EFLG_01));
 				y++;
 			} while (--i > 0);
 			
-			rc1 |= (Map.eflg[Map.map[y][x]]);
-			rc1 |= (Map.eflg[Map.map[y][x + 1]]);
+			rc1 |= (World.eflg[World.map[y][x]]);
+			rc1 |= (World.eflg[World.map[y][x + 1]]);
 		}
 	
 		/*

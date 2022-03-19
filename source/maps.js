@@ -50,15 +50,15 @@ var MAP_NBR_MAPS = 0x05,
 	/*
 	 * global vars
 	 */
-	Map.map = [];	// [0x2C][0x20];
-	Map.eflg = [];	// [0x100];
-	Map.frow = 0;
-	Map.tilesBank = 0;
+	World.map = [];	// [0x2C][0x20];
+	World.eflg = [];	// [0x100];
+	World.frow = 0;
+	World.tilesBank = 0;
 
 	for (var n = 0; n < 0x2C; n++) {
-		Map.map[n] = [];
+		World.map[n] = [];
 		for (var m = 0; m < 0x20; m++) {
-			Map.map[n][m] = 0;
+			World.map[n][m] = 0;
 		}
 	}
 
@@ -70,21 +70,21 @@ var MAP_NBR_MAPS = 0x05,
 	 * we need to *8 to convert from block rows to block numbers (there
 	 * are 8 blocks per block row). This is achieved by *2 then &0xfff8.
 	 */
-	Map.expand = function() {
+	World.expand = function() {
 		var i, j, k, l;
 		var row = 0, col = 0;
 		var pbnum = 0;
 		
-		pbnum = Map.submaps[Game.submap].bnum + ((2 * Map.frow) & 0xfff8);
+		pbnum = World.submaps[Game.submap].bnum + ((2 * World.frow) & 0xfff8);
 		row = col = 0;
 		
 		for (i = 0; i < 0x0b; i++) {  /* 0x0b rows of blocks */
 			for (j = 0; j < 0x08; j++) {  /* 0x08 blocks per row */
 				for (k = 0, l = 0; k < 0x04; k++) {  /* expand one block */
-					Map.map[row][col++] = Map.blocks[Map.bnums[pbnum]][l++];
-					Map.map[row][col++] = Map.blocks[Map.bnums[pbnum]][l++];
-					Map.map[row][col++] = Map.blocks[Map.bnums[pbnum]][l++];
-					Map.map[row][col]   = Map.blocks[Map.bnums[pbnum]][l++];
+					World.map[row][col++] = World.blocks[World.bnums[pbnum]][l++];
+					World.map[row][col++] = World.blocks[World.bnums[pbnum]][l++];
+					World.map[row][col++] = World.blocks[World.bnums[pbnum]][l++];
+					World.map[row][col]   = World.blocks[World.bnums[pbnum]][l++];
 					row += 1; col -= 3;
 				}
 				row -= 4; col += 4;
@@ -99,16 +99,16 @@ var MAP_NBR_MAPS = 0x05,
 	 *
 	 * ASM 0cc3
 	 */
-	Map.init = function() {
+	World.init = function() {
 		/*sys_printf("xrick/map_init: map=%#04x submap=%#04x\n", g_map, game_submap);*/
-		Map.tilesBank = (Map.submaps[Game.submap].page == 1) ? 2 : 1;
+		World.tilesBank = (World.submaps[Game.submap].page == 1) ? 2 : 1;
 
-		Map.eflg_expand((Map.submaps[Game.submap].page == 1) ? 0x10 : 0x00);
-		Map.expand();
+		World.eflg_expand((World.submaps[Game.submap].page == 1) ? 0x10 : 0x00);
+		World.expand();
 		Ent.reset();
-		Ent.actvis(Map.frow + MAP_ROW_SCRTOP, Map.frow + MAP_ROW_SCRBOT);
-		Ent.actvis(Map.frow + MAP_ROW_HTTOP, Map.frow + MAP_ROW_HTBOT);
-		Ent.actvis(Map.frow + MAP_ROW_HBTOP, Map.frow + MAP_ROW_HBBOT);
+		Ent.actvis(World.frow + MAP_ROW_SCRTOP, World.frow + MAP_ROW_SCRBOT);
+		Ent.actvis(World.frow + MAP_ROW_HTTOP, World.frow + MAP_ROW_HTBOT);
+		Ent.actvis(World.frow + MAP_ROW_HBTOP, World.frow + MAP_ROW_HBBOT);
 	}
 	
 	/*
@@ -116,12 +116,12 @@ var MAP_NBR_MAPS = 0x05,
 	 *
 	 * ASM 1117
 	 */
-	Map.eflg_expand = function(offs) {
+	World.eflg_expand = function(offs) {
 		var i, j, k;
 		
 		for (i = 0, k = 0; i < 0x10; i++) {
-			j = Map.eflg_c[offs + i++];
-			while (j--) Map.eflg[k++] = Map.eflg_c[offs + i];
+			j = World.eflg_c[offs + i++];
+			while (j--) World.eflg[k++] = World.eflg_c[offs + i];
 		}
 	}
 	
@@ -131,14 +131,14 @@ var MAP_NBR_MAPS = 0x05,
 	 * ASM 0c08
 	 * return: TRUE/next submap OK, FALSE/map finished
 	 */
-	Map.chain = function() {
+	World.chain = function() {
 		var c, t;
 		
 		Game.chsm = 0;
 		ESbonus.counting = false;
 	
 		/* find connection */
-		c = Map.submaps[Game.submap].connect;
+		c = World.submaps[Game.submap].connect;
 		t = 3;
 	/*
 		IFDEBUG_MAPS(
@@ -151,12 +151,12 @@ var MAP_NBR_MAPS = 0x05,
 		 * look for the first connector with compatible row number. if none
 		 * found, then panic
 		 */
-		for (c = Map.submaps[Game.submap].connect; ; c++) {
-			if (Map.connect[c].dir == 0xff) {
+		for (c = World.submaps[Game.submap].connect; ; c++) {
+			if (World.connect[c].dir == 0xff) {
 				sys_panic("(map_chain) can not find connector\n");
 			}
-			if (Map.connect[c].dir != Game.dir) { continue; }
-			t = (Ent.ents[1].y >> 3) + Map.frow - Map.connect[c].rowout;
+			if (World.connect[c].dir != Game.dir) { continue; }
+			t = (Ent.ents[1].y >> 3) + World.frow - World.connect[c].rowout;
 			if (t < 3) { break; }
 		}
 	
@@ -169,7 +169,7 @@ var MAP_NBR_MAPS = 0x05,
 		  );
 	*/
 	
-		if (Map.connect[c].submap == 0xff) {
+		if (World.connect[c].submap == 0xff) {
 			/* no next submap - request next map */
 	/*		IFDEBUG_MAPS(
 			  sys_printf("chain to next map\n");
@@ -182,8 +182,8 @@ var MAP_NBR_MAPS = 0x05,
 		  sys_printf("chain to submap=%#04x rowin=%#04x\n",
 			 map_connect[c].submap, map_connect[c].rowin);
 		  );*/
-		Map.frow = Map.frow - Map.connect[c].rowout + Map.connect[c].rowin;
-		Game.submap = Map.connect[c].submap;
+		World.frow = World.frow - World.connect[c].rowout + World.connect[c].rowin;
+		Game.submap = World.connect[c].submap;
 	/*	IFDEBUG_MAPS(
 		  sys_printf("xrick/maps: chain frow=%#04x\n",
 			 map_frow);
@@ -198,11 +198,11 @@ var MAP_NBR_MAPS = 0x05,
 	 * ASM 0025
 	 *
 	 */
-	Map.resetMarks = function() {
+	World.resetMarks = function() {
 		var i;
 	
 		for (i = 0; i < MAP_NBR_MARKS; i++) {
-			Map.marks[i].ent &= ~MAP_MARK_NACT;
+			World.marks[i].ent &= ~MAP_MARK_NACT;
 		}
 	}
 	

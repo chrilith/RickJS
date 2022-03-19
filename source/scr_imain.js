@@ -56,7 +56,7 @@
 				Draw.pic(0, 0, 0x140, 0xc8, Data.getItem("pic_splash"));
 				seq = 2;
 
-				fading = GE.IN;
+				fading = GE.Fader.IN;
 				Sysvid.fade_start();
 				break;
 
@@ -67,7 +67,7 @@
 					seen++;
 					seq = 4;
 
-					fading = GE.OUT;
+					fading = GE.Fader.OUT;
 					Sysvid.fade_start();
 				}
 				break;
@@ -80,7 +80,7 @@
 					} else {
 						seq = 7;
 
-						fading = GE.OUT;
+						fading = GE.Fader.OUT;
 						Sysvid.fade_start();
 					}
 				}
@@ -110,7 +110,7 @@
 
 				seq = 5;
 
-				fading = GE.IN;
+				fading = GE.Fader.IN;
 				Sysvid.fade_start();
 				break;
 
@@ -122,7 +122,7 @@
 					seen++;
 					seq = 1;
 
-					fading = GE.OUT;
+					fading = GE.Fader.OUT;
 					Sysvid.fade_start();
 				}
 				break;
@@ -134,13 +134,13 @@
 					} else {
 						seq = 7;
 
-						fading = GE.OUT;
+						fading = GE.Fader.OUT;
 						Sysvid.fade_start();
 					}
 				}
 				break;	
 		}
-		
+
 		if (fading) {
 			Game.rects = [Draw.SCREENRECT];
 			if (!Sysvid.fader.update(timer, fading)) {

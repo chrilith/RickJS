@@ -56,7 +56,7 @@ var TYPE_1A = (0x00),
 		Game.score += 50;
 		if (Ent.ents[e].flags & ENT_FLG_ONCE) {
 			/* make sure entity won't be activated again */
-			Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
+			World.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 		}
 		Ent.ents[e].offsx = (Ent.ents[e].x >= 0x80 ? -0x02 : 0x02);
 	//#undef offsx

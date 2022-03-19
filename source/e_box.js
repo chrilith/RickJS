@@ -29,7 +29,7 @@ var SEQ_INIT = 0x0A;
 			Ent.ents[e].sprite = sp[Ent.ents[e].cnt >> 1];
 			if (--Ent.ents[e].cnt == 0) {
 				Ent.ents[e].n = 0;
-				Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
+				World.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 			}
 		} else {
 			/*
@@ -45,7 +45,7 @@ var SEQ_INIT = 0x0A;
 					Game.bullets = GAME_BULLETS_INIT;
 				}
 				Ent.ents[e].n = 0;
-				Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
+				World.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 	
 			} else if (E_RICK_STTST(E_RICK_STSTOP) &&
 					U.fboxtest(e, ERick.stop_x, ERick.stop_y)) {

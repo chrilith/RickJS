@@ -45,7 +45,7 @@ var E_BULLET_NO  = 2,
 			/* update bullet center coordinates */
 			EBullet.xc = E_BULLET_ENT.x + 0x0c;
 			EBullet.yc = E_BULLET_ENT.y + 0x05;
-			if (Map.eflg[Map.map[EBullet.yc >> 3][EBullet.xc >> 3]] &
+			if (World.eflg[World.map[EBullet.yc >> 3][EBullet.xc >> 3]] &
 					MAP_EFLG_SOLID) {
 				/* hit something: deactivate */
 				E_BULLET_ENT.n = 0;

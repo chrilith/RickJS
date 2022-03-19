@@ -42,7 +42,7 @@
 			Game.score += ESbonus.bonus;  /* add bonus to score */
 			Syssnd.play("WAV_SBONUS2", 1);
 			/* make sure the entity won't be activated again */
-			Map.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
+			World.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
 		} else {
 			/* keep counting */
 			if (--ESbonus.counter == 0) {

@@ -37,7 +37,7 @@ var SCROLL_RUNNING = 1,
 		/* translate map */
 		for (i = MAP_ROW_SCRTOP; i < MAP_ROW_HBBOT; i++) {
 			for (j = 0x00; j < 0x20; j++) {
-				Map.map[i][j] = Map.map[i + 1][j];
+				World.map[i][j] = World.map[i + 1][j];
 			}
 		}
 	
@@ -60,15 +60,15 @@ var SCROLL_RUNNING = 1,
 		Draw.map();
 		Ent.draw();
 		Draw.drawStatus();
-		Map.frow++;
+		World.frow++;
 	
 		/* loop */
 		if (static_n1++ == 7) {
 			/* activate visible entities */
-			Ent.actvis(Map.frow + MAP_ROW_HBTOP, Map.frow + MAP_ROW_HBBOT);
+			Ent.actvis(World.frow + MAP_ROW_HBTOP, World.frow + MAP_ROW_HBBOT);
 			
 			/* prepare map */
-			Map.expand();
+			World.expand();
 			
 			/* display */
 			Draw.map();
@@ -105,7 +105,7 @@ var SCROLL_RUNNING = 1,
 		/* translate map */
 		for (i = MAP_ROW_SCRBOT; i > MAP_ROW_HTTOP; i--) {
 			for (j = 0x00; j < 0x20; j++) {
-				Map.map[i][j] = Map.map[i - 1][j];
+				World.map[i][j] = World.map[i - 1][j];
 			}
 		}
 		
@@ -128,15 +128,15 @@ var SCROLL_RUNNING = 1,
 		Draw.map();
 		Ent.draw();
 		Draw.drawStatus();
-		Map.frow--;
+		World.frow--;
 	
 		/* loop */
 		if (static_n2++ == 7) {
 			/* activate visible entities */
-			Ent.actvis(Map.frow + MAP_ROW_HTTOP, Map.frow + MAP_ROW_HTBOT);
+			Ent.actvis(World.frow + MAP_ROW_HTTOP, World.frow + MAP_ROW_HTBOT);
 		
 			/* prepare map */
-			Map.expand();
+			World.expand();
 		
 			/* display */
 			Draw.map();

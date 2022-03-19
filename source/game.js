@@ -302,7 +302,7 @@ var LEFT = 1,
 
 
 				case CHAIN_SUBMAP:
-					if (Map.chain())
+					if (World.chain())
 						game_state = CHAIN_END;
 					else {
 						Game.bullets = 0x06;
@@ -330,10 +330,10 @@ var LEFT = 1,
 								game_state = GAMEOVER;
 			
 							} else {  /* initialize game */
-								Ent.ents[1].x = Map.maps[Game.map].x;
-								Ent.ents[1].y = Map.maps[Game.map].y;
-								map_frow = Map.maps[Game.map].row & 0xFF; // (U8)Map...
-								Game.submap = Map.maps[Game.map].submap;
+								Ent.ents[1].x = World.maps[Game.map].x;
+								Ent.ents[1].y = World.maps[Game.map].y;
+								map_frow = World.maps[Game.map].row & 0xFF; // (U8)Map...
+								Game.submap = World.maps[Game.map].submap;
 								game_state = CHAIN_END;
 							}
 							break;
@@ -345,7 +345,7 @@ var LEFT = 1,
 
 
 				case CHAIN_END:
-					Map.init();                     /* initialize the map */
+					World.init();                     /* initialize the map */
 					isave();                        /* save data in case of a restart */
 					Ent.clprev();                   /* cleanup entities */
 					Draw.map();                     /* draw the map onto the buffer */
@@ -432,23 +432,23 @@ var LEFT = 1,
 		Game.map = Sysarg.args_map;
 
 		if (Sysarg.args_submap == 0) {
-			Game.submap = Map.maps[Game.map].submap;
-			Map.frow = Map.maps[Game.map].row;
+			Game.submap = World.maps[Game.map].submap;
+			World.frow = World.maps[Game.map].row;
 		} else {
 			// dirty hack to determine frow //
 			Game.submap = Sysarg.args_submap;
 			i = 0;
 			while (i < MAP_NBR_CONNECT &&
-				(Map.connect[i].submap != Game.submap ||
-					Map.connect[i].dir != RIGHT)) {
+				(World.connect[i].submap != Game.submap ||
+					World.connect[i].dir != RIGHT)) {
 				i++;
 			}
-			Map.frow = Map.connect[i].rowin - 0x10;
+			World.frow = World.connect[i].rowin - 0x10;
 			Ent.ents[1].y = 0x10 << 3;
 		}
 
-		Ent.ents[1].x = Map.maps[Game.map].x;
-		Ent.ents[1].y = Map.maps[Game.map].y;
+		Ent.ents[1].x = World.maps[Game.map].x;
+		Ent.ents[1].y = World.maps[Game.map].y;
 		Ent.ents[1].w = 0x18;
 		Ent.ents[1].h = 0x15;
 		Ent.ents[1].n = 0x01;
@@ -456,9 +456,9 @@ var LEFT = 1,
 		Ent.ents[1].front = false;
 		Ent.ents[ENT_ENTSNUM].n = 0xFF;
 
-		Map.resetMarks();
+		World.resetMarks();
 
-		Map.init();
+		World.init();
 		isave();
 	}
 	
@@ -532,7 +532,7 @@ var LEFT = 1,
 		Ent.ents[1].n = 1;
 	
 		irestore();
-		Map.init();
+		World.init();
 		isave();
 		Ent.clprev();
 		Draw.map();
@@ -546,7 +546,7 @@ var LEFT = 1,
 	 */
 	function isave() {
 		ERick.save();
-		isave_frow = Map.frow;
+		isave_frow = World.frow;
 	}
 
 	/*
@@ -555,7 +555,7 @@ var LEFT = 1,
 	 */
 	function irestore() {
 		ERick.restore();
-		Map.frow = isave_frow;
+		World.frow = isave_frow;
 	}
 	
 /* EOF */

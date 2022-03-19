@@ -372,8 +372,8 @@ var ENT_FLG_TRIGGERS =
 		/*sys_printf("rect %#04x,%#04x %#04x %#04x ", x, y, width, height);*/
 		
 		/* align to tiles */
-		x0 = G.Convert.toSInt16(x & 0xfff8);
-		y0 = G.Convert.toSInt16(y & 0xfff8);
+		x0 = G.Convert.toInt16(x & 0xfff8);
+		y0 = G.Convert.toInt16(y & 0xfff8);
 		w0 = width;
 		h0 = height;
 		if (x - x0) { w0 = (w0 + (x - x0)) | 0x0007; }
@@ -458,8 +458,8 @@ var ENT_FLG_TRIGGERS =
 				if (Ent.ents[i].n && Ent.ents[i].sprite) {
 					/* (1.1) ... and is still active now and still needs to be drawn, */
 					/*       then check if rectangles intersect */
-					dx = Math.fabs(Ent.ents[i].x - Ent.ents[i].prev_x);
-					dy = Math.fabs(Ent.ents[i].y - Ent.ents[i].prev_y);
+					dx = Math.abs(Ent.ents[i].x - Ent.ents[i].prev_x);
+					dy = Math.abs(Ent.ents[i].y - Ent.ents[i].prev_y);
 
 					if (dx < 0x20 && dy < 0x16) {
 						/* (1.1.1) if they do, then create one rectangle */

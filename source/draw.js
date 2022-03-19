@@ -192,7 +192,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	
 	  g = 0;
 	  
-	  Sysvid.fb.enableClipping(x0 - DRAW_XYMAP_SCRLEFT, y0 - DRAW_XYMAP_SCRTOP + 8, w, h);
+	  Sysvid.fb.enableClipping(new G.Rect(x0 - DRAW_XYMAP_SCRLEFT, y0 - DRAW_XYMAP_SCRTOP + 8, w, h));
 	  Draw.setfb(x - DRAW_XYMAP_SCRLEFT, y - DRAW_XYMAP_SCRTOP + 8);
 	  Draw.sprite(number, fb.x, fb.y);
 	  Sysvid.fb.disableClipping();
@@ -241,8 +241,8 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		var xs, ys, tmp;
 	
 		/* aligne to column and row, prepare map coordinate, and clip */
-		xmap = G.Convert.toSInt16(x & 0xFFF8);
-		ymap = G.Convert.toSInt16(y & 0xFFF8);
+		xmap = G.Convert.toInt16(x & 0xFFF8);
+		ymap = G.Convert.toInt16(y & 0xFFF8);
 		cmax = (x - xmap == 0 ? 0x20 : 0x28);  /* width, 4 tl cols, 8 pix each */
 		rmax = (y & 0x04) ? 0x20 : 0x18;  /* height, 3 or 4 tile rows */
 

@@ -222,7 +222,7 @@ var LEFT = 1,
 					Draw.drawStatus();				/* draw the status bar onto the buffer */
 					Game.rects = [Draw.SCREENRECT];	/* request full buffer refresh */
 					game_state = PLAY0;
-					fading = GE.IN;
+					fading = GE.Fader.IN;
 					Sysvid.fade_start();
 					return;
 

@@ -14,9 +14,9 @@ var	SYSVID_WIDTH	= 320;
 	
 	function init_screen(w, h/*, bpp, flags*/) {
 		var s = new G.Screen(SYSVID_WIDTH, SYSVID_HEIGHT);
-		s.setActive();
+		G.Screen.setActive(s);
 		s.enableFiltering(false);
-		s.setStretch(G.Screen.STRETCH_UNIFORM);
+		s.setStretch(s.STRETCH_UNIFORM);
 		return s;
 	}
 	

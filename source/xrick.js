@@ -1,3 +1,5 @@
+var G = Gamalto;
+var GE = G.Effects;
 // Fix problem with use of old version of Gamalto (and some internal problems too...)
 G.Vector = G.Vector2;
 
@@ -39,7 +41,7 @@ XRick = {
 		var nb = 0;
 		
 		Data = new G.BitmapLibrary();
-		var mixer = G.AudioMixer.create(4, G.AudioMixer.BIT_HTML5AUDIO);
+		var mixer = G.AudioMixer.create(4, G.AudioMixer.MIX_HTML5AUDIO);
 		Snd = new G.SoundPool(mixer);
 
 		Data.pushItem("pic_splash", "data/title.png");
@@ -49,10 +51,11 @@ XRick = {
 		Data.pushItem("sprites_data", "data/sprites.png");
 		
 		Data.load().then(function() {
-			var pool = G.SoundPool; 
-			var ext = pool.isSupported(pool.MP3) ? ".mp3" :
-						pool.isSupported(pool.WAVE) ? ".wav" : ".ogg";
-console.log("data ok next", ext);
+//			var pool = G.SoundPool; 
+//			var ext = pool.isSupported(pool.MP3) ? ".mp3" :
+//						pool.isSupported(pool.WAVE) ? ".wav" : ".ogg";
+
+			var ext = ".mp3";
 			
 			Snd.pushItem("WAV_GAMEOVER", "sound/gameover" + ext);
 			Snd.pushItem("WAV_SBONUS2", "sound/sbonus2" + ext);
@@ -103,7 +106,7 @@ console.log("data ok next", ext);
 			Tiles.data[1] = new G.TileSet(Data.getItem("tiles_data"), size).addSections(256, new G.Rect(0, 1 * 8 * 256, 8, 8 * 256));
 			Tiles.data[2] = new G.TileSet(Data.getItem("tiles_data"), size).addSections(256, new G.Rect(0, 2 * 8 * 256, 8, 8 * 256));
 			
-			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data")).addSections(SPRITES_NBR_SPRITES, null, new G.Size(32, 21));
+			Sprites.data = new G.SpriteSheet(Data.getItem("sprites_data")).addSections(new G.Size(32, 21), SPRITES_NBR_SPRITES);
 
 			XRick.main();
 		}, function(e) {
@@ -116,4 +119,4 @@ console.log("data ok next", ext);
 	
 };
 
-Gamalto.init(XRick.init);
+XRick.init();

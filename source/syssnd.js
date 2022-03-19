@@ -39,7 +39,7 @@
 		var snd = Snd.getItem(name);
 		if (snd) {
 			//snd.play(G.Convert.toUInt16(loop));
-			mixer.playSound(snd, G.Convert.toUInt16(loop) - 1);
+			mixer.play(snd, G.Convert.toUint16(loop) - 1);
 		}
 	}
 

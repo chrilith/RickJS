@@ -51,7 +51,7 @@ var SCREEN_TIMEOUT = 4000;
 				Game.setmusic(World.maps[Game.map].tune, 1);
 
 				seq = 1;
-				fading = GE.IN;
+				fading = GE.Fader.IN;
 				Sysvid.fade_start();
 				break;
 
@@ -87,7 +87,7 @@ var SCREEN_TIMEOUT = 4000;
 
 		if (Control.status & CONTROL_FIRE) {  /* end as soon as key pressed */
 			seq = 4;
-			fading = GE.OUT;
+			fading = GE.Fader.OUT;
 			Sysvid.fade_start();
 		}
 

@@ -27,7 +27,7 @@ var LEFT = 1,
 	GAME_BULLETS_INIT = 6;
 
 (function() {
-	
+
 	/*
 	 * local typedefs
 	 */
@@ -65,17 +65,17 @@ var LEFT = 1,
 	Game.bombs = 0;
 	Game.bullets = 0;
 	Game.score = 0;
-	
+
 	Game.map = 0;
 	Game.submap = 0;
 
 	Game.dir = 0;
 	Game.chsm = false;
-	
+
 	Game.cheat1 = 0;
 	Game.cheat2 = 0;
 	Game.cheat3 = 0;
-	
+
 	Game.hscores = [
 		{ score: 8000, name: "SIMES@@@@@" },
 		{ score: 7000, name: "JAYNE@@@@@" },
@@ -110,13 +110,13 @@ var LEFT = 1,
 			channel = Syssnd.play(name, loop);
 		}
 	}
-	
-	
+
+
 	Game.stopmusic = function() {
 		Syssnd.stopsound(music_snd);
 		music_snd = null;
 	}
-		
+
 	/*
 	 * Main loop
 	 */
@@ -128,7 +128,7 @@ var LEFT = 1,
 		Game.period = /*sysarg_args_period ? sysarg_args_period :*/ GAME_PERIOD;
 //		tm = Sys.gettime();
 		game_state = XRICK;
-		
+
 		/* main loop */
 		Game.timer = new G.Timer(gameLoop, 30, 0);
 		Game.timer.start(true);
@@ -156,7 +156,7 @@ var LEFT = 1,
 
 //		freedata(); /* free cached data */
 	}
-	
+
 	/*
 	 * Prepare frame
 	 *
@@ -180,7 +180,7 @@ var LEFT = 1,
 					}
 					break;
 
-	
+
 				case INIT_GAME:
 					init();
 					game_state = INTRO_MAIN;
@@ -200,7 +200,7 @@ var LEFT = 1,
 					}
 					break;
 
-	
+
 				case INTRO_MAP:
 					switch (Screen.introMap(timer)) {
 						case SCREEN_RUNNING:
@@ -215,7 +215,7 @@ var LEFT = 1,
 					}
 					break;
 
-					
+
 				case INIT_BUFFER:
 					Sysvid.clear();					/* clear buffer */
 					Draw.map();						/* draw the map onto the buffer */
@@ -232,7 +232,7 @@ var LEFT = 1,
 					game_state = PAUSE_PRESSED1B;
 					break;
 
-					
+
 				case PAUSE_PRESSED1B:
 					if (Control.status & CONTROL_PAUSE) {
 						return;
@@ -260,7 +260,7 @@ var LEFT = 1,
 					}
 					return;
 
-	
+
 				case PLAY0:
 					play0();
 					break;
@@ -281,7 +281,7 @@ var LEFT = 1,
 					}
 					break;
 
-					
+
 				case PLAY2:
 					if (E_RICK_STTST(E_RICK_STDEAD)) {  /* rick is dead */
 						if (Game.cheat1 || --Game.lives) {
@@ -295,7 +295,7 @@ var LEFT = 1,
 						game_state = PLAY3;
 					}
 					break;
-					
+
 				case PLAY3:
 					play3(timer);
 					return;
@@ -308,12 +308,12 @@ var LEFT = 1,
 						Game.bullets = 0x06;
 						Game.bombs = 0x06;
 						Game.map++;
-					
+
 						if (Game.map == 0x04) {
 							/* reached end of game */
 							/* FIXME @292?*/
 						}
-					
+
 						game_state = CHAIN_MAP;
 					}
 					break;
@@ -322,17 +322,17 @@ var LEFT = 1,
 					switch (Screen.introMap(timer)) {
 						case SCREEN_RUNNING:
 							return;
-			
+
 						case SCREEN_DONE:
 							if (Game.map >= 0x04) {  /* reached end of game */
 								Sysarg.args_map = 0;
 								Sysarg.args_submap = 0;
 								game_state = GAMEOVER;
-			
+
 							} else {  /* initialize game */
 								Ent.ents[1].x = World.maps[Game.map].x;
 								Ent.ents[1].y = World.maps[Game.map].y;
-								map_frow = World.maps[Game.map].row & 0xFF; // (U8)Map...
+								World.frow = World.maps[Game.map].row & 0xFF; // (U8)Map...
 								Game.submap = World.maps[Game.map].submap;
 								game_state = CHAIN_END;
 							}
@@ -354,7 +354,7 @@ var LEFT = 1,
 					game_state = PLAY0;
 					return;
 
-	
+
 				case SCROLL_UP:
 					switch (Scroll.up()) {
 						case SCROLL_RUNNING:
@@ -365,7 +365,7 @@ var LEFT = 1,
 					}
 					break;
 
-				
+
 				case SCROLL_DOWN:
 					switch (Scroll.down()) {
 						case SCROLL_RUNNING:
@@ -376,13 +376,13 @@ var LEFT = 1,
 					}
 					break;;
 
-	
+
 				case RESTART:
 					restart();
 					game_state = PLAY0;
 					return;
 
-	
+
 				case GAMEOVER:
 					switch (Screen.gameover()) {
 						case SCREEN_RUNNING:
@@ -396,7 +396,7 @@ var LEFT = 1,
 					}
 					break;
 
-	
+
 				case GETNAME:
 					switch (Screen.getname()) {
 						case SCREEN_RUNNING:
@@ -410,20 +410,20 @@ var LEFT = 1,
 					}
 					break;
 
-	
+
 				case EXIT:
 					return;
 			}
 		}
 	}
-	
+
 	/*
 	 * Initialize the game
 	 */
 	function init() {
-		
+
 		E_RICK_STRST(0xff);
-		
+
 		Game.lives = 6;
 		Game.bombs = 6;
 		Game.bullets = 6;
@@ -461,7 +461,7 @@ var LEFT = 1,
 		World.init();
 		isave();
 	}
-	
+
 	/*
 	 * play0
 	 *
@@ -472,12 +472,12 @@ var LEFT = 1,
 			game_state = GAMEOVER;
 			return;
 		}
-		
+
 		if (Control.last == CONTROL_EXIT) {  /* request to exit the game */
 			game_state = EXIT;
 			return;
 		}
-		
+
 		Ent.action();      /* run entities */
 		EThem.rndseed++;  /* (0270) */
 
@@ -490,7 +490,7 @@ var LEFT = 1,
 	 */
 	var static_r;	// static
 	function play3(timer) {
-	
+
 		Draw.clearStatus();  /* clear the status bar */
 		Ent.draw();          /* draw all entities onto the buffer */
 		/* sound */
@@ -500,7 +500,7 @@ var LEFT = 1,
 			Game.rects = [Draw.SCREENRECT];
 			if (!Sysvid.fader.update(timer, fading)) {
 				fading = Sysvid.fade_end();
-			}			
+			}
 		} else {
 			static_r = [Draw.STATUSRECT]; static_r.push.apply(static_r, Ent.rects);  /* refresh status bar too */
 			Game.rects = static_r;//[Draw.SCREENRECT];  /* take care to cleanup draw_STATUSRECT->next later! */
@@ -525,12 +525,12 @@ var LEFT = 1,
 	 */
 	function restart() {
 		E_RICK_STRST(E_RICK_STDEAD|E_RICK_STZOMBIE);
-		
+
 		Game.bullets = 6;
 		Game.bombs = 6;
-		
+
 		Ent.ents[1].n = 1;
-	
+
 		irestore();
 		World.init();
 		isave();
@@ -557,6 +557,6 @@ var LEFT = 1,
 		ERick.restore();
 		World.frow = isave_frow;
 	}
-	
+
 /* EOF */
 })();

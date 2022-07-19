@@ -64,7 +64,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 				width = 0x0100 - x;
 			}
 		}
-	
+
 		if (y < DRAW_XYMAP_SCRTOP) {
 			if ((y + height) < DRAW_XYMAP_SCRTOP) {
 				return { returns: true, x: x, y: y, width: width, height: height };
@@ -79,7 +79,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 				height = DRAW_XYMAP_HBTOP - y;
 			}
 		}
-	
+
 		return { returns: false, x: x, y: y, width: width, height: height };
 	}
 
@@ -98,19 +98,19 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		while (Draw.tilesSubList() != 0xFE) {  /* draw sub-list */
 			t.y += 8;  /* go down one tile i.e. 8 lines */
 			fb = t.clone();
-		}		
-	}	
-	
+		}
+	}
+
 	/*
 	 * Draw a list of tiles onto the frame buffer -- same as draw_tilesList,
 	 * but accept an immediate string as parameter. Note that the string needs
 	 * to be properly terminated with 0xfe (\376) and 0xff (\377) chars.
 	 */
 	Draw.tilesListImm = function(list) {
-		Draw.tllst = (typeof list == "array") ? list : list.split(""); // FIXME? 
+		Draw.tllst = (typeof list == "array") ? list : list.split(""); // FIXME?
 		Draw.tilesList();
 	}
-	
+
 	/*
 	 * Draw a sub-list of tiles onto the frame buffer
 	 * start at position indicated by fb ; leave fb pointing to the next
@@ -156,11 +156,11 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	 * x, y: sprite position (pixels, screen)
 	 * fb: CHANGED
 	 */
-	Draw.sprite = function(number, x, y) {	
+	Draw.sprite = function(number, x, y) {
 		Draw.setfb(x, y);
 		Sprites.data.draw(Sysvid.fb.renderer, fb.x, fb.y, number);
 	}
-		
+
 	/*
 	 * Draw a sprite
 	 *
@@ -175,12 +175,12 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		i,         /* frame buffer shifter */
 		im;        /* tile flag shifter */
 	  var flg, tmp;/* tile flag */
-	
+
 	  x0 = x;
 	  y0 = y;
 	  w = 0x20;
 	  h = 0x15;
-	
+
 	  tmp = Draw.clipms(x0, y0, w, h);
 	  if (tmp.returns) {  /* return if not visible */
 		return;
@@ -189,9 +189,9 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	  y0 = tmp.y;
 	  w = tmp.width;
 	  h = tmp.height;
-	
+
 	  g = 0;
-	  
+
 	  Sysvid.fb.enableClipping(new G.Rect(x0 - DRAW_XYMAP_SCRLEFT, y0 - DRAW_XYMAP_SCRTOP + 8, w, h));
 	  Draw.setfb(x - DRAW_XYMAP_SCRLEFT, y - DRAW_XYMAP_SCRTOP + 8);
 	  Draw.sprite(number, fb.x, fb.y);
@@ -199,11 +199,11 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	/*
 	  for (r = 0; r < 0x15; r++) {
 		if (r >= h || y + r < y0) continue;
-	
+
 		i = 0x1f;
 		im = x - (x & 0xfff8);
 		flg = World.eflg[World.map[(y + r) >> 3][(x + 0x1f)>> 3]];
-	
+
 	#define LOOP(N, C0, C1) \
 		d = sprites_data[number][g + N]; \
 		for (c = C0; c >= C1; c--, i--, d >>= 4, im--) { \
@@ -215,19 +215,19 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		  if (c >= w || x + c < x0) continue; \
 		  if (d & 0x0F) fb[i] = (fb[i] & 0xF0) | (d & 0x0F); \
 		}
-	
+
 		LOOP(3, 0x1f, 0x18);
 		LOOP(2, 0x17, 0x10);
 		LOOP(1, 0x0f, 0x08);
 		LOOP(0, 0x07, 0x00);
-	
+
 	#undef LOOP
 		fb += SYSVID_WIDTH;
 		g += 4;
 	  }
 	*/
 	}
-	
+
 	/*
 	 * Redraw the map behind a sprite
 	 * align to tile column and row, and clip
@@ -239,7 +239,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		var rmax, cmax;
 		var xmap, ymap;	// S16
 		var xs, ys, tmp;
-	
+
 		/* aligne to column and row, prepare map coordinate, and clip */
 		xmap = G.Convert.toInt16(x & 0xFFF8);
 		ymap = G.Convert.toInt16(y & 0xFFF8);
@@ -254,7 +254,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		ymap = tmp.y;
 		cmax = tmp.width;
 		rmax = tmp.height;
-	
+
 		/* get back to screen */
 		xs = xmap - DRAW_XYMAP_SCRLEFT;
 		ys = ymap - DRAW_XYMAP_SCRTOP;
@@ -279,9 +279,9 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	 */
 	Draw.map = function() {
 		var i, j;
-		
+
 		Draw.tilesBank = World.tilesBank;
-	
+
 		for (i = 0; i < 0x18; i++) {  /* 0x18 rows */
 			Draw.setfb(0x20, 8 + (i * 8));
 			for (j = 0; j < 0x20; j++)  /* 0x20 tiles per row */
@@ -297,15 +297,15 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		var i;
 //		var sv;
 //		var s = [0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0xfe];
-		
+
 		Draw.tilesBank = 0;
-		
+
 //		for (i = 5, sv = Game.score; i >= 0; i--) {
 //			s[i] = 0x30 + (sv % 10 | 0);
 //			sv /= 10;
 //		}
 		Draw.tllst = ("00000" + Game.score + "\xFE").substr(-7).split("");
-		
+
 		Draw.setfb(DRAW_STATUS_SCORE_X, DRAW_STATUS_Y);
 		Draw.tilesList();
 
@@ -313,12 +313,12 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 		for (i = 0; i < Game.bullets; i++) {
 			Draw.tile(TILES_BULLET);
 		}
-	
+
 		Draw.setfb(DRAW_STATUS_BOMBS_X, DRAW_STATUS_Y);
 		for (i = 0; i < Game.bombs; i++) {
 			Draw.tile(TILES_BOMB);
 		}
-		
+
 		Draw.setfb(DRAW_STATUS_LIVES_X, DRAW_STATUS_Y);
 		for (i = 0; i < Game.lives; i++) {
 			Draw.tile(TILES_RICK);
@@ -330,7 +330,7 @@ var DRAW_STATUS_BULLETS_X = 0x68,
 	 */
 	Draw.clearStatus = function() {
 		var i;
-		
+
 		Draw.tilesBank = 0;
 		Draw.setfb(DRAW_STATUS_SCORE_X, DRAW_STATUS_Y);
 		for (i = 0; i < DRAW_STATUS_LIVES_X/8 + 6 - DRAW_STATUS_SCORE_X/8; i++) {

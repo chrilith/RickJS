@@ -13,14 +13,14 @@ var	SCREEN_RUNNING	= 0,
 	/* global
 	 *********/
 	Screen.xrick = function(timer) {
-	
+
 		if (seq == 0) {
 			Sysvid.clear();
 	//		draw_img(IMG_SPLASH);
 			Game.rects = [Draw.SCREENRECT];
 			seq = 1;
 		}
-		
+
 		switch (seq) {
 			case 1:
 				if (wait++ > 0x2) {
@@ -29,7 +29,7 @@ var	SCREEN_RUNNING	= 0,
 					wait = 0;
 				}
 				break;
-	
+
 			case 2:  /* wait */
 				if (wait++ > 0x20) {
 					seq = 99;
@@ -37,7 +37,7 @@ var	SCREEN_RUNNING	= 0,
 				}
 				break;
 		}
-	
+
 		if (Control.status & CONTROL_EXIT) { /* check for exit request */
 			return SCREEN_EXIT;
 		}

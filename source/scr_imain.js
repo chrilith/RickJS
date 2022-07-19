@@ -45,7 +45,7 @@
 			Game.rects = [Draw.SCREENRECT];
 			Game.setmusic("WAV_TUNE5", -1);
 		}
-		
+
 		 switch (seq) {
 			case 1:  /* display Rick Dangerous title and Core Design copyright */
 				if (fading) {
@@ -95,10 +95,10 @@
 
 				/* hall of fame title */
 				Draw.pic(64, 4, 190, 22, Data.getItem("pic_haf"));
-			
+
 				/* hall of fame content */
 				Draw.setfb(56, 48);
-			
+
 				for (i = 0; i < 8; i++) {
 					var score = ("00" + Game.hscores[i].score).substr(-6);
 					Draw.tllst = (score +
@@ -126,7 +126,7 @@
 					Sysvid.fade_start();
 				}
 				break;
-				
+
 			case 6:  /* wait for key released */
 				if (!(Control.status & CONTROL_FIRE)) {
 					if (seen++ == 0) {
@@ -138,7 +138,7 @@
 						Sysvid.fade_start();
 					}
 				}
-				break;	
+				break;
 		}
 
 		if (fading) {

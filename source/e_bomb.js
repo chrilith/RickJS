@@ -3,7 +3,7 @@ var E_BOMB_NO = 3,
 	E_BOMB_TICKER = (0x2D);
 
 (function() {
-	
+
 	/*
 	 * public vars (for performance reasons)
 	 */
@@ -15,7 +15,7 @@ var E_BOMB_NO = 3,
 	 * private vars
 	 */
 	var e_bomb_ticker;
-		
+
 	/*
 	 * Bomb hit test
 	 *
@@ -37,7 +37,7 @@ var E_BOMB_NO = 3,
 		}
 		return true;
 	}
-	
+
 	/*
 	 * Initialize bomb
 	 */
@@ -47,16 +47,16 @@ var E_BOMB_NO = 3,
 		E_BOMB_ENT.y = y;
 		e_bomb_ticker = E_BOMB_TICKER;
 		EBomb.lethal = false;
-	
+
 		/*
 		 * Atari ST dynamite sprites are not centered the
 		 * way IBM PC sprites were ... need to adjust things a little bit
 		 */
 		E_BOMB_ENT.x += 4;
 		E_BOMB_ENT.y += 5;
-	
+
 	}
-	
+
 	/*
 	 * Entity action
 	 *
@@ -65,14 +65,14 @@ var E_BOMB_NO = 3,
 	EBomb.action = function(/*UNUSED(U8 e)*/) {
 		/* tick */
 		e_bomb_ticker--;
-	
+
 		if (e_bomb_ticker == 0) {
 			/*
 			 * end: deactivate
 			 */
 			E_BOMB_ENT.n = 0;
 			EBomb.lethal = false;
-	
+
 		} else if (e_bomb_ticker >= 0x0A) {
 			/*
 			 * ticking
@@ -80,14 +80,14 @@ var E_BOMB_NO = 3,
 			if ((e_bomb_ticker & 0x03) == 0x02) {
 				Syssnd.play("WAV_BOMBSHHT", 1);
 			}
-	
+
 			/* ST bomb sprites sequence is longer */
 			if (e_bomb_ticker < 40)
 				E_BOMB_ENT.sprite = 0x99 + 19 - (e_bomb_ticker >> 1);
 			else
-	
+
 			E_BOMB_ENT.sprite = (e_bomb_ticker & 0x01) ? 0x23 : 0x22;
-	
+
 		} else if (e_bomb_ticker == 0x09) {
 			/*
 			 * explode
@@ -97,7 +97,7 @@ var E_BOMB_NO = 3,
 			E_BOMB_ENT.x -= 4;
 			E_BOMB_ENT.y -= 5;
 			E_BOMB_ENT.sprite = 0xa8 + 4 - (e_bomb_ticker >> 1);
-	
+
 			EBomb.xc = E_BOMB_ENT.x + 0x0C;
 			EBomb.yc = E_BOMB_ENT.y + 0x000A;
 			EBomb.lethal = true;
@@ -109,7 +109,7 @@ var E_BOMB_NO = 3,
 			 * exploding
 			 */
 			E_BOMB_ENT.sprite = 0xa8 + 4 - (e_bomb_ticker >> 1);
-	
+
 			/* exploding, hence lethal */
 			if (EBomb.hit(E_RICK_NO)) {
 				ERick.gozombie();

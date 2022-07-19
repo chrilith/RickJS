@@ -22,6 +22,6 @@
 		next.unshift(r);
 		return next;
 	}
-	
+
 /* EOF */
 })();

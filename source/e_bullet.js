@@ -10,7 +10,7 @@ var E_BULLET_NO  = 2,
 	 */
 	EBullet.offsx = 0;
 	EBullet.xc = EBullet.yc = 0;
-	
+
 	/*
 	 * Initialize bullet
 	 */
@@ -36,7 +36,7 @@ var E_BULLET_NO  = 2,
 	EBullet.action = function(/*UNUSED(U8 e)*/) {
 		/* move bullet */
 		E_BULLET_ENT.x += EBullet.offsx;
-		
+
 		if (E_BULLET_ENT.x <= -0x10 || E_BULLET_ENT.x > 0xe8) {
 			/* out: deactivate */
 			E_BULLET_ENT.n = 0;
@@ -52,6 +52,6 @@ var E_BULLET_NO  = 2,
 			}
 		}
 	}
-	
+
 /* EOF */
 })();

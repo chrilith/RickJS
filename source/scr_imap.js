@@ -30,10 +30,10 @@ var SCREEN_TIMEOUT = 4000;
 
 				Draw.setfb(40, 16);
 				Draw.tilesSubList();
-				
+
 				Draw.setfb(40, 104);
 				Draw.tilesList();
-				
+
 				Game.rects = null;
 
 				init();
@@ -97,10 +97,10 @@ var SCREEN_TIMEOUT = 4000;
 				fading = Sysvid.fade_end();
 			}
 		}
-		
+
 		if (Control.status & CONTROL_EXIT)  /* check for exit request */
 			return SCREEN_EXIT;
-		
+
 		if (seq == 5 && !fading) {  /* end as soon as key pressed */
 			Sysvid.clear();
 			seq = 0;
@@ -119,7 +119,7 @@ var SCREEN_TIMEOUT = 4000;
 	 */
 	function drawtb() {
 		var i;
-		
+
 		flipflop++;
 		if (flipflop & 0x01) {
 			Draw.setfb(136, 16 + 16);
@@ -148,7 +148,7 @@ var SCREEN_TIMEOUT = 4000;
 	 */
 	function drawlr() {
 	  var i;
-	
+
 		if (flipflop & 0x02) {
 			for (i = 0; i < 8; i++) {
 				Draw.setfb(128, 16 + i * 8 + 16);
@@ -181,7 +181,7 @@ var SCREEN_TIMEOUT = 4000;
 	function drawcenter() {
 		var tn0 = [ 0x07, 0x5B, 0x7F, 0xA3, 0xC7 ],
 			i, j, tn = tn0[Game.map];
-	
+
 		for (i = 0; i < 6; i++) {
 			Draw.setfb(136, (24 + 8 * i) + 16);
 			for (j = 0; j < 6; j++) {
@@ -189,7 +189,7 @@ var SCREEN_TIMEOUT = 4000;
 			}
 		}
 	}
-	
+
 	/*
 	 * Next Step (0x1A74)
 	 *
@@ -213,7 +213,7 @@ var SCREEN_TIMEOUT = 4000;
 	 */
 	function anim() {
 		var i;
-		
+
 		if (run) {
 			i = Screen.imapsl[spbase + spoffs];
 			if (i == 0) {

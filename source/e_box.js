@@ -13,14 +13,14 @@ var SEQ_INIT = 0x0A;
 (function() {
 
 	var sp = [ 0x24, 0x25, 0x26, 0x27, 0x28 ];  /* explosion sprites sequence */
-	
+
 	/*
 	 * Entity action
 	 *
 	 * ASM 245A
 	 */
 	EBox.action = function(e) {
-	
+
 		if (Ent.ents[e].n & ENT_LETHAL) {
 			/*
 			 * box is lethal i.e. exploding
@@ -38,7 +38,7 @@ var SEQ_INIT = 0x0A;
 			if (ERick.boxtest(e)) {
 				/* rick: collect bombs or bullets and stop */
 				Syssnd.play("WAV_BOX", 1);
-	
+
 				if (Ent.ents[e].n == 0x10) {
 					Game.bombs = GAME_BOMBS_INIT;
 				} else {  /* 0x11 */
@@ -46,17 +46,17 @@ var SEQ_INIT = 0x0A;
 				}
 				Ent.ents[e].n = 0;
 				World.marks[Ent.ents[e].mark].ent |= MAP_MARK_NACT;
-	
+
 			} else if (E_RICK_STTST(E_RICK_STSTOP) &&
 					U.fboxtest(e, ERick.stop_x, ERick.stop_y)) {
 				/* rick's stick: explode */
 				explode(e);
-	
+
 			} else if (E_BULLET_ENT.n && U.fboxtest(e, EBullet.xc, EBullet.yc)) {
 				/* bullet: explode (and stop bullet) */
 				E_BULLET_ENT.n = 0;
 				explode(e);
-	
+
 			} else if (EBomb.lethal && EBomb.hit(e)) {
 				/* bomb: explode */
 				explode(e);
@@ -73,6 +73,6 @@ var SEQ_INIT = 0x0A;
 		Syssnd.play("WAV_EXPLODE", 1);
 	}
 
-	
+
 /* EOF */
 })();

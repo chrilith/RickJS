@@ -119,4 +119,4 @@ XRick = {
 	
 };
 
-XRick.init();
+Gamalto.core.init(XRick.init);

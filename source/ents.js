@@ -39,34 +39,34 @@ var ENT_XRICK,			// defined later
 
 /*
 	typedef struct {
-		U8 n;          // b00 
-		//U8 b01;    // b01 in ASM code but never used 
-		S16 x;         // b02 - position 
-		S16 y;         // w04 - position 
-		U8 sprite;     // b08 - sprite number 
-		//U16 w0C;   // w0C in ASM code but never used 
-		U8 w;          // b0E - width 
-		U8 h;          // b10 - height 
-		U16 mark;      // w12 - number of the mark that created the entity 
-		U8 flags;      // b14 
-		S16 trig_x;    // b16 - position of trigger box 
-		S16 trig_y;    // w18 - position of trigger box 
-		S16 xsave;     // b1C 
-		S16 ysave;     // w1E 
-		U16 sprbase;   // w20 
-		U16 step_no_i; // w22 
-		U16 step_no;   // w24 
-		S16 c1;        // b26 
-		S16 c2;        // b28 
-		U8 ylow;       // b2A 
-		S16 offsy;     // w2C 
-		U8 latency;    // b2E 
-		U8 prev_n;     // new 
-		S16 prev_x;    // new 
-		S16 prev_y;    // new 
-		U8 prev_s;     // new 
-		U8 front;      // new 
-		U8 trigsnd;    // new 
+		U8 n;          // b00
+		//U8 b01;    // b01 in ASM code but never used
+		S16 x;         // b02 - position
+		S16 y;         // w04 - position
+		U8 sprite;     // b08 - sprite number
+		//U16 w0C;   // w0C in ASM code but never used
+		U8 w;          // b0E - width
+		U8 h;          // b10 - height
+		U16 mark;      // w12 - number of the mark that created the entity
+		U8 flags;      // b14
+		S16 trig_x;    // b16 - position of trigger box
+		S16 trig_y;    // w18 - position of trigger box
+		S16 xsave;     // b1C
+		S16 ysave;     // w1E
+		U16 sprbase;   // w20
+		U16 step_no_i; // w22
+		U16 step_no;   // w24
+		S16 c1;        // b26
+		S16 c2;        // b28
+		U8 ylow;       // b2A
+		S16 offsy;     // w2C
+		U8 latency;    // b2E
+		U8 prev_n;     // new
+		S16 prev_x;    // new
+		S16 prev_y;    // new
+		U8 prev_s;     // new
+		U8 front;      // new
+		U8 trigsnd;    // new
 	} ent_t;
 */
 
@@ -105,7 +105,7 @@ var ENT_XRICK,			// defined later
 			prev_s: 0,	/* new */
 			front: 0,		/* new */
 			trigsnd: 0,	/* new */
-			
+
 			get seq() { return this.c1; },	// e_bonus.c
 			set seq(x) { this.c1 = x; },
 			get cnt() { return this.c1; },	// e_box.c
@@ -122,14 +122,14 @@ var ENT_XRICK,			// defined later
 			set offsxx(x) { this.c2 = x; }
 		};
 	}
-	
+
 	Ent.rects = null;
-	
+
 	ENT_XRICK = Ent.ents[1];
 	E_RICK_ENT = Ent.ents[E_RICK_NO];
 	E_BULLET_ENT = Ent.ents[E_BULLET_NO];
 	E_BOMB_ENT = Ent.ents[E_BOMB_NO];
-	
+
 	/*
 	 * Reset entities
 	 *
@@ -137,10 +137,10 @@ var ENT_XRICK,			// defined later
 	 */
 	Ent.reset = function() {
 		var i;
-	
+
 		E_RICK_STRST(E_RICK_STSTOP);
 		EBomb.lethal = false;
-		
+
 		Ent.ents[0].n = 0;
 		for (i = 2; Ent.ents[i].n != 0xff; i++) {
 			Ent.ents[i].n = 0;
@@ -165,10 +165,10 @@ var ENT_XRICK,			// defined later
 				return { returns: true, e: e };
 			}
 		}
-		
+
 		return { returns: false, e: e };
 	}
-	
+
 	/*
 	* Create an entity on slots 9 to C by using the first slot available.
 	* Entities of type e_them on slots 9 to C can kill rick when lethal,
@@ -187,7 +187,7 @@ var ENT_XRICK,			// defined later
 			   return { returns: false, e: e };
 		   }
 	   }
-	   
+
 	   /* look for a slot */
 	   for (e = 0x09; e < 0x0c; e++) {
 		   if (Ent.ents[e].n == 0) {  /* if slot available, use it */
@@ -195,10 +195,10 @@ var ENT_XRICK,			// defined later
 			   return { returns: true, e: e };
 		   }
 	   }
-	   
+
 	   return { returns: false, e: e };
 	}
-	
+
 	/*
 	 * Process marks that are within the visible portion of the map,
 	 * and create the corresponding entities.
@@ -215,7 +215,7 @@ var ENT_XRICK,			// defined later
 		var m,
 			e,
 			y, tmp;
-	
+
 		/*
 		* go through the list and find the first mark that
 		* is visible, i.e. which has a row greater than the
@@ -224,11 +224,11 @@ var ENT_XRICK,			// defined later
 		for (m = World.submaps[Game.submap].mark;
 			World.marks[m].row != 0xff && World.marks[m].row < frow;
 			m++) {};
-	
+
 		if (World.marks[m].row == 0xff) { /* none found */
 			return;
 		}
-	
+
 		/*
 		* go through the list and process all marks that are
 		* visible, i.e. which have a row lower than the last
@@ -237,12 +237,12 @@ var ENT_XRICK,			// defined later
 		for (;
 			World.marks[m].row != 0xff && World.marks[m].row < lrow;
 			m++) {
-	
+
 			/* ignore marks that are not active */
 			if (World.marks[m].ent & MAP_MARK_NACT) {
 				continue;
 			}
-	
+
 			/*
 			 * allocate a slot to the new entity
 			 *
@@ -272,7 +272,7 @@ var ENT_XRICK,			// defined later
 			 * >17             e_them, type 3
 			 * 47              zombie
 			 */
-	
+
 			if (!(World.marks[m].flags & ENT_FLG_STOPRICK)) {
 				if (World.marks[m].ent >= 0x10) {
 					/* boxes, bonuses and type 3 e_them go to slot 4-8 */
@@ -291,14 +291,14 @@ var ENT_XRICK,			// defined later
 				e = 0;
 				Ent.ents[0].c1 = 0;
 			}
-		
+
 			/*
 			 * initialize the entity
 			 */
 			Ent.ents[e].mark = m;
 			Ent.ents[e].flags = World.marks[m].flags;
 			Ent.ents[e].n = World.marks[m].ent;
-		
+
 			/*
 			 * if entity is to be already running (i.e. not asleep and waiting
 			 * for some trigger to move), then use LETHALR i.e. restart flag, right
@@ -307,9 +307,9 @@ var ENT_XRICK,			// defined later
 			if (Ent.ents[e].flags & ENT_FLG_LETHALR) {
 				Ent.ents[e].n |= ENT_LETHAL;
 			}
-		
+
 			Ent.ents[e].x = World.marks[m].xy & 0xf8;
-		
+
 			y = (World.marks[m].xy & 0x07) + (World.marks[m].row & 0xf8) - World.frow;
 			y <<= 3;
 			if (!(Ent.ents[e].flags & ENT_FLG_STOPRICK)) {
@@ -319,9 +319,9 @@ var ENT_XRICK,			// defined later
 
 			Ent.ents[e].xsave = Ent.ents[e].x;
 			Ent.ents[e].ysave = Ent.ents[e].y;
-		
+
 			/*Ent.ents[e].w0C = 0;*/  /* in ASM code but never used */
-		
+
 			Ent.ents[e].w = Ent.entdata[World.marks[m].ent].w;
 			Ent.ents[e].h = Ent.entdata[World.marks[m].ent].h;
 			Ent.ents[e].sprbase = Ent.entdata[World.marks[m].ent].spr;
@@ -345,14 +345,14 @@ var ENT_FLG_TRIGGERS =
 				Ent.ents[e].sprbase = (Ent.entdata[World.marks[m].ent].sni & 0x00ff); // (U8)
 			}
 //#undef ENT_FLG_TRIGGERS
-		
+
 			Ent.ents[e].sprite = Ent.ents[e].sprbase;
 			Ent.ents[e].trig_x = World.marks[m].lt & 0xf8;
 			Ent.ents[e].latency = (World.marks[m].lt & 0x07) << 5;  /* <<5 eq *32 */
-		
+
 			Ent.ents[e].trig_y = 3 + 8 * ((World.marks[m].row & 0xf8) - World.frow +
 									(World.marks[m].lt & 0x07));
-		
+
 			Ent.ents[e].c2 = 0;
 			Ent.ents[e].offsy = 0;
 			Ent.ents[e].ylow = 0;
@@ -368,9 +368,9 @@ var ENT_FLG_TRIGGERS =
 	Ent.addrect = function(x, y, width, height) {
 		var x0, y0;	// S16
 		var w0, h0;	// U16
-	
+
 		/*sys_printf("rect %#04x,%#04x %#04x %#04x ", x, y, width, height);*/
-		
+
 		/* align to tiles */
 		x0 = G.Convert.toInt16(x & 0xfff8);
 		y0 = G.Convert.toInt16(y & 0xfff8);
@@ -389,19 +389,19 @@ var ENT_FLG_TRIGGERS =
 		y0 = tmp.y;
 		w0 = tmp.width;
 		h0 = tmp.height;
-	
+
 		/*sys_printf("-> %#04x,%#04x %#04x %#04x\n", x0, y0, w0, h0);*/
-	
+
 		y0 += 8;
-	
+
 		/* get to screen */
 		x0 -= DRAW_XYMAP_SCRLEFT;
 		y0 -= DRAW_XYMAP_SCRTOP;
-	
+
 		/* add rectangle to the list */
 		Ent.rects = Rects.create(x0, y0, w0, h0, Ent.rects);
 	}
-	
+
 	/*
 	 * Draw all entities onto the frame buffer.
 	 *
@@ -413,15 +413,15 @@ var ENT_FLG_TRIGGERS =
 	Ent.draw = function() {
 		var i;
 		var dx, dy;
-	
+
 		Draw.tilesBank = World.tilesBank;
-	
+
 		/* reset rectangles list */
 		Rects.free(Ent.rects);
 		Ent.rects = null;
-	
+
 		/*sys_printf("\n");*/
-	
+
 		/*
 		 * background loop : erase all entities that were visible
 		 */
@@ -431,7 +431,7 @@ var ENT_FLG_TRIGGERS =
 				Draw.spriteBackground(Ent.ents[i].prev_x, Ent.ents[i].prev_y);
 			}
 		}
-	
+
 		/*
 		 * foreground loop : draw all entities that are visible
 		 */
@@ -447,7 +447,7 @@ var ENT_FLG_TRIGGERS =
 					Ent.ents[i].front);
 			}
 		}
-	
+
 		/*
 		 * rectangles loop : figure out which parts of the screen have been
 		 * impacted and need to be refreshed, then save state
@@ -491,14 +491,14 @@ var ENT_FLG_TRIGGERS =
 			Ent.ents[i].prev_s = Ent.ents[i].sprite;
 		}
 	}
-	
+
 	/*
 	 * Clear entities previous state
 	 *
 	 */
 	Ent.clprev = function() {
 		var i;
-		
+
 		for (i = 0; Ent.ents[i].n != 0xff; i++) {
 			Ent.ents[i].prev_n = 0;
 		}
@@ -533,14 +533,14 @@ var ENT_FLG_TRIGGERS =
 		ESbonus.start,  /* 16 - 2182 */
 		ESbonus.stop  /* 17 - 2143 */
 	];
-	
+
 	/*
 	 * Run entities action function
 	 *
 	 */
 	Ent.action = function() {
 		var i, k;
-	
+
 	/*
 	  IFDEBUG_ENTS(
 		sys_printf("xrick/ents: --------- action ----------------\n");

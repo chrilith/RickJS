@@ -42,13 +42,13 @@ var TILE_POINTER = 0x3A,	// \072
 	var tm = 0;	// static
 	Screen.getname = function() {
 		var i, j;
-	
+
 		if (seq == 0) {
 			/* figure out if this is a high score */
 			if (Game.score < Game.hscores[7].score) {
 				return SCREEN_DONE;
 			}
-			
+
 			/* prepare */
 			Draw.tilesBank = 0;
 			for (i = 0; i < 10; i++) {
@@ -60,9 +60,9 @@ var TILE_POINTER = 0x3A,	// \072
 			Game.rects = [Draw.SCREENRECT];
 			seq = 1;
 		}
-	
+
 		switch (seq) {
-	
+
 			case 1:  /* prepare screen */
 				Sysvid.clear();
 
@@ -82,7 +82,7 @@ var TILE_POINTER = 0x3A,	// \072
 				pointer_show(true);
 				seq = 2;
 				break;
-	
+
 			case 2:  /* wait for key pressed */
 				if (Control.status & CONTROL_FIRE) {
 					seq = 3;
@@ -127,7 +127,7 @@ var TILE_POINTER = 0x3A,	// \072
 					//sys_sleep(50);
 				}
 				break;
-	
+
 			case 3:  /* wait for FIRE released */
 				if (!(Control.status & CONTROL_FIRE)) {
 					if (x == 5 && y == 4) {  /* end */
@@ -159,7 +159,7 @@ var TILE_POINTER = 0x3A,	// \072
 				//	sys_sleep(50);
 				}
 				break;
-	
+
 			case 4:  /* wait for UP released */
 				if (!(Control.status & CONTROL_UP) ||
 						Sys.gettime() - tm > AUTOREPEAT_TMOUT) {
@@ -168,7 +168,7 @@ var TILE_POINTER = 0x3A,	// \072
 				//	sys_sleep(50);
 				}
 				break;
-	
+
 			case 5:  /* wait for DOWN released */
 				if (!(Control.status & CONTROL_DOWN) ||
 						Sys.gettime() - tm > AUTOREPEAT_TMOUT) {
@@ -177,7 +177,7 @@ var TILE_POINTER = 0x3A,	// \072
 				//	sys_sleep(50);
 				}
 				break;
-	
+
 			case 6:  /* wait for LEFT released */
 				if (!(Control.status & CONTROL_LEFT) ||
 						Sys.gettime() - tm > AUTOREPEAT_TMOUT) {
@@ -186,7 +186,7 @@ var TILE_POINTER = 0x3A,	// \072
 				//	sys_sleep(50);
 				}
 				break;
-	
+
 			case 7:  /* wait for RIGHT released */
 				if (!(Control.status & CONTROL_RIGHT) ||
 						Sys.gettime() - tm > AUTOREPEAT_TMOUT) {
@@ -196,11 +196,11 @@ var TILE_POINTER = 0x3A,	// \072
 				}
 				break;
 		}
-	
+
 		if (Control.status & CONTROL_EXIT) {  /* check for exit request */
 			return SCREEN_EXIT;
 		}
-	
+
 		if (seq == 99) {  /* seq 99, we're done */
 			Sysvid.clear();
 			seq = 0;
@@ -210,7 +210,7 @@ var TILE_POINTER = 0x3A,	// \072
 		}
 	}
 
-	
+
 	function pointer_show(show) {
 		Draw.setfb(TOPLEFT_X + x * 8 * 2, TOPLEFT_Y + y * 8 * 2 + 8);
 		Draw.tile((show == true)?TILE_POINTER:'@'.charCodeAt(0));
@@ -218,7 +218,7 @@ var TILE_POINTER = 0x3A,	// \072
 
 	function name_update() {
 		var i;
-	
+
 		i = x + y * 6;
 		if (i < 26 && p < 10) {
 			name[p++] = 'A'.charCodeAt(0) + i;
@@ -233,27 +233,27 @@ var TILE_POINTER = 0x3A,	// \072
 			p--;
 		}
 	}
-	
-	
+
+
 	function name_draw() {
 		var i;
-		
+
 		Draw.setfb(NAMEPOS_X, NAMEPOS_Y);
-	
+
 		for (i = 0; i < p; i++) {
 			Draw.tile(name[i]);
 		}
 		for (i = p; i < 10; i++) {
 			Draw.tile(TILE_CURSOR);
 		}
-	
+
 		Draw.setfb(NAMEPOS_X, NAMEPOS_Y + 8);
 		for (i = 0; i < 10; i++) {
 			Draw.tile('@'.charCodeAt(0));
 		}
 		Draw.setfb(NAMEPOS_X + 8 * (p < 9 ? p : 9), NAMEPOS_Y + 8);
 		Draw.tile(TILE_POINTER);
-	}	
-	
+	}
+
 /* EOF */
 })();

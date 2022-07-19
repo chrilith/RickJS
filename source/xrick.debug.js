@@ -3,7 +3,7 @@
 	var all  = document.getElementsByTagName('script'),
 		path = all[all.length - 1].src,
 		dir	 = path.substr(0, path.indexOf("xrick.debug.js"));
-		
+
 		document.write(' \
 			<script src="' + dir + 'xrick.js"></script> \
 			<script src="' + dir + 'system.js"></script> \

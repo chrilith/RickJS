@@ -105,7 +105,7 @@ typedef struct {
 */
 World.connect/*[MAP_NBR_CONNECT]*/ = [
 	/* map 0 */
-	
+
 	/* map 0 submap 0 */
 	{ dir: 0x01, rowout: 0x18, submap: 0xff, rowin: 0x00 },
 	{ dir: 0x00, rowout: 0x38, submap: 0x01, rowin: 0x18 },
@@ -142,9 +142,9 @@ World.connect/*[MAP_NBR_CONNECT]*/ = [
 	{ dir: 0x01, rowout: 0x18, submap: 0x07, rowin: 0x18 },
 	{ dir: 0x00, rowout: 0x80, submap: 0xff, rowin: 0x00 },
 	{ dir: 0xff, rowout: 0x00, submap: 0x00, rowin: 0x00 },
-	
+
 	/* map 1 */
-	
+
 	/* map 1 submap 9 */
 	{ dir: 0x00, rowout: 0x18, submap: 0x0a, rowin: 0x60 },
 	{ dir: 0x01, rowout: 0x78, submap: 0xff, rowin: 0x00 },
@@ -189,9 +189,9 @@ World.connect/*[MAP_NBR_CONNECT]*/ = [
 	{ dir: 0x00, rowout: 0x18, submap: 0xff, rowin: 0x00 },
 	{ dir: 0x01, rowout: 0x68, submap: 0x12, rowin: 0x68 },
 	{ dir: 0xff, rowout: 0x00, submap: 0x00, rowin: 0x00 },
-	
+
 	/* map 2 */
-	
+
 	/* map 2 submap 14 */     /* sequence 14-15-16-17 is clean */
 	{ dir: 0x01, rowout: 0x20, submap: 0xff, rowin: 0x00 },
 	{ dir: 0x00, rowout: 0x40, submap: 0x15, rowin: 0x18 },
@@ -276,9 +276,9 @@ World.connect/*[MAP_NBR_CONNECT]*/ = [
 	{ dir: 0x01, rowout: 0x18, submap: 0x24, rowin: 0x18 },
 	{ dir: 0x00, rowout: 0x50, submap: 0xff, rowin: 0x00 },
 	{ dir: 0xff, rowout: 0x00, submap: 0x00, rowin: 0x00 },
-	
+
 	/* map 3 */
-	
+
 	/* map 3 submap 26 */
 	{ dir: 0x01, rowout: 0x20, submap: 0xff, rowin: 0x00 },
 	{ dir: 0x00, rowout: 0x28, submap: 0x27, rowin: 0x68 },

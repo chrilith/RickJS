@@ -4,7 +4,7 @@
 	 ********/
 	var gamepad, MAN = G.EventManager,
 		eventMan = new G.EventManager(MAN.BIT_KEYBOARD/*|MAN.BIT_KBICADE*/);
-	
+
 	function TSTBIT(b) {
 		return (Control.status && b) == b;
 	}
@@ -14,7 +14,7 @@
 	function CLRBIT(b) {
 		Control.status &= ~(b);
 	}
-	
+
 	function processGamepad() {
 		if (!gamepad) { return; }
 
@@ -23,7 +23,7 @@
 		CLRBIT(CONTROL_LEFT);
 		CLRBIT(CONTROL_RIGHT);
 		CLRBIT(CONTROL_FIRE);
-		
+
 		if (gamepad.buttons[0]) {
 			SETBIT(CONTROL_FIRE);
 		}
@@ -32,9 +32,9 @@
 			var v = new G.Vector(gamepad.axes[0], gamepad.axes[1]),
 				a = v.getAngle() * 180 / Math.PI,
 				s = v.getLength();
-			
+
 			a = (a + 22.5) % 360 / 45 | 0;
-			
+
 			if (a == 0) {
 				SETBIT(CONTROL_UP);
 			} else if (a == 1) {
@@ -58,10 +58,10 @@
 			}
 		}
 	}
-	
+
 	function processEvent(event) {
 		var key, E = G.Event;
-		
+
 		switch (event.type) {
 			case E.KEYDOWN:
 				key = event.keyCode;
@@ -167,7 +167,7 @@
 
 	Sysevt.poll = function() {
 		var e;
-		
+
 		if (!gamepad || (!gamepad.connected)) {
 			while ((e = eventMan.poll())) {
 				processEvent(e);
@@ -176,7 +176,7 @@
 			processGamepad();
 		}
 	}
-	
+
 	Sysevt.wait = function() {
 		Sysevt.poll();
 	}

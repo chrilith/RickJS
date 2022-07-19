@@ -1,20 +1,20 @@
 (function() {
-	
+
 	var timer;
-	
+
 	/*
 	 * Return number of microseconds elapsed since first call
 	 */
 	var ticks_base = 0;	// static
 	Sys.gettime = function() {
 		var ticks;
-		
+
 		ticks = Date.now();
-		
+
 		if (!ticks_base) {
 			ticks_base = ticks;
 		}
-	
+
 		return ticks - ticks_base;
 	}
 

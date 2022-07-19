@@ -5,7 +5,7 @@
 	ESbonus.counting = false;
 	ESbonus.counter = 0;
 	ESbonus.bonus = 0;
-	
+
 	/*
 	 * Entity action / start counting
 	 *
@@ -22,7 +22,7 @@
 			Syssnd.play("WAV_SBONUS1", 1);
 		}
 	}
-	
+
 	/*
 	 * Entity action / stop counting
 	 *
@@ -30,11 +30,11 @@
 	 */
 	ESbonus.stop = function(e) {
 		Ent.ents[e].sprite = 0; /* invisible */
-	
+
 		if (!ESbonus.counting) {
 			return;
 		}
-	
+
 		if (U.trigbox(e, ENT_XRICK.x + 0x0C, ENT_XRICK.y + 0x0A)) {
 			/* rick is within trigger box */
 			ESbonus.counting = false;  /* stop counting */

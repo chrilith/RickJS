@@ -25,21 +25,21 @@
 	 */
 	Sysarg.init = function() {
 		var argv = new G.CommandLine();
-	
+
 		if (argv.hasParam("map")) {
 			//if (++i == argc) sysarg_fail("missing map number");
 			Sysarg.args_map = parseInt(argv.getParam("map"), 10) - 1;
 	//		if (sysarg_args_map < 0 || sysarg_args_map >= MAP_NBR_MAPS-1)
 	//			sysarg_fail("invalid map number");
 		}
-	
+
 		if (argv.hasParam("submap")) {
 	//		if (++i == argc) sysarg_fail("missing submap number");
 			Sysarg.args_submap = parseInt(argv.getParam("submap"), 10) - 1;
 	//		if (sysarg_args_submap < 0 || sysarg_args_submap >= MAP_NBR_SUBMAPS)
 	//			sysarg_fail("invalid submap number");
 		}
-	
+
 		/* this is dirty (sort of) */
 		if (Sysarg.args_submap > 0 && Sysarg.args_submap < 9) {
 			Sysarg.args_map = 0;

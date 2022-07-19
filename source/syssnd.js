@@ -16,14 +16,14 @@
  */
 
 (function() {
-	
+
 	var mixer,
 		A = G.AudioMixer;
-	
+
 	Syssnd.init = function() {
 		mixer = Snd.mixer;
 	}
-	
+
 	/*
 	 * Play a sound
 	 *

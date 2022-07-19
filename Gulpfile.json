@@ -1,0 +1,8 @@
+{
+	"dir": {
+    "build": "build/",
+    "clean": [
+      "build/"
+    ]
+	}
+}

@@ -1,3 +1,4 @@
+node_modules/
 *sublime*
 *.min.*
 *.jar
@@ -8,4 +9,5 @@ compile/old/
 compile/*.js
 compile/*.jar
 test/
+build/
 TODO.TXT
